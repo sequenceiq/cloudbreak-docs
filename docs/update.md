@@ -27,3 +27,24 @@ cbd doctor
 cbd start
 ```
 > Cloudbreak needs to download updated docker images for the new version, so this step may take a while.
+
+# Update existing clusters
+
+Upgrading from version `1.4.0` to newer versions (`1.5.0` or `1.6.0`) doesn't require any manual modification from the users.
+
+If the Cloudbreak has been updated from `1.3.0` to `1.4.0` version then existing clusters need to be updated to be still managable through Cloudbreak.
+To update existing clusters from `1.3.0` to `1.4.0` version, run the following commands on the `cbgateway` node of the cluster:
+
+- Update the version of the Salt-Bootsrap tool on the nodes:
+```
+salt '*' cmd.run 'curl -Ls https://github.com/sequenceiq/salt-bootstrap/releases/download/v0.1.2/salt-bootstrap_0.1.2_Linux_x86_64.tgz | tar -zx -C /usr/sbin/ salt-bootstrap'
+```
+- Trigger restart of tool on the nodes:
+```
+salt '*' service.dead salt-bootstrap
+```
+> **NOTE** Checking the version of the Salt-Bootsrap on the nodes:
+>
+>```
+>salt '*' cmd.run 'salt-bootstrap --version'
+>```
