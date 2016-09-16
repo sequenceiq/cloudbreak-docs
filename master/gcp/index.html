@@ -573,7 +573,11 @@ networks</strong> panel.</p>
 <ul>
 <li><strong>Create a new virtual network and a new subnet</strong>: Every time a cluster is created with this kind of network setup a new virtual network and a new subnet with the specified IP range will be created for the instances on Google Cloud.</li>
 <li><strong>Create a new subnet in an existing virtual network</strong>: Use this kind of network setup if you already have a virtual network on Google Cloud where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it.</li>
-<li><strong>Use an existing subnet in an existing virtual network</strong>: Use this kind of network setup if you have an existing virtual network with one or more subnets on Google Cloud and you'd like to start the instances of a cluster in one of those subnets.</li>
+<li><strong>Use an existing subnet in an existing virtual network</strong>: Use this kind of network setup if you have an existing virtual network with one or more subnets on Google Cloud and you'd like to start the instances of a cluster in one of those subnets. <strong><em>Important constraints of the following parameters:</em></strong><ul>
+<li><code>Don't create public IPs</code>: Please make sure that Cloudbreak can access the launched instances and the instances can reach the internet</li>
+<li><code>Don't create new firewall rules</code>: Please make sure that the created instances in the subnet can reach each other (open every port in the subnet)</li>
+</ul>
+</li>
 <li><strong>Use a legacy network without subnets</strong>: Use this kind of network setup if you have a legacy virtual network on Google Cloud that doesn't have subnet support and you'd like to start instances in that virtual network directly.</li>
 </ul>
 <blockquote>
