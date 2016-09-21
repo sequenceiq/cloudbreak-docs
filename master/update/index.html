@@ -293,6 +293,9 @@
         <li class="main active"><a href="#update-cloudbreak-deployer">Update Cloudbreak Deployer</a></li>
         
     
+        <li class="main "><a href="#update-existing-clusters">Update existing clusters</a></li>
+        
+    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -326,6 +329,26 @@
 
 <blockquote>
 <p>Cloudbreak needs to download updated docker images for the new version, so this step may take a while.</p>
+</blockquote>
+<h1 id="update-existing-clusters">Update existing clusters</h1>
+<p>Upgrading from version <code>1.4.0</code> to newer versions (<code>1.5.0</code> or <code>1.6.0</code>) doesn't require any manual modification from the users.</p>
+<p>If Cloudbreak has been updated from <code>1.3.0</code> to <code>1.4.0</code> version then existing clusters need to be updated to be still managable through Cloudbreak.
+To update existing clusters from <code>1.3.0</code> to <code>1.4.0</code> or newer versions, run the following commands on the <code>cbgateway</code> node of the cluster:</p>
+<ul>
+<li>Update the version of the Salt-Bootsrap tool on the nodes:</li>
+</ul>
+<pre><code>salt '*' cmd.run 'curl -Ls https://github.com/sequenceiq/salt-bootstrap/releases/download/v0.1.2/salt-bootstrap_0.1.2_Linux_x86_64.tgz | tar -zx -C /usr/sbin/ salt-bootstrap'
+</code></pre>
+
+<ul>
+<li>Trigger restart of tool on the nodes:</li>
+</ul>
+<pre><code>salt '*' service.dead salt-bootstrap
+</code></pre>
+
+<blockquote>
+<p><strong>NOTE</strong> Checking the version of the Salt-Bootsrap on the nodes:</p>
+<p><code>salt '*' cmd.run 'salt-bootstrap --version'</code></p>
 </blockquote>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/update.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
