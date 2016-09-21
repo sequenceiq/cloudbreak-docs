@@ -68,8 +68,6 @@ There are some advanced features when deploying a new cluster, these are the fol
 
 `Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 
-`Shipyard enabled cluster` This is selected by default. Cloudbreak will start a [Shipyard](https://shipyard-project.com/) container which helps you to manage your containers.
-
 `Config recommendation strategy` Strategy for configuration recommendations how will be applied. Recommended 
 configurations gathered by the response of the stack advisor. 
 
@@ -81,4 +79,8 @@ configurations gathered by the response of the stack advisor.
 
 * `Disable S3 Access By Default`               Cluster will not be able to reach S3 buckets.
 * `Create Role For S3 Access`                  The Cloudformation template will create a new role and assign to every instance.
-* `Define Existing Role For S3 Access`         Cluster will use the predefined instance role. You should define the role in the `Role for S3 connection` box.
+* `Define Existing Role For S3 Access`         Cluster will use the predefined instance role. You should define the role ARN in the `Role for S3 connection` box.
+
+`Hostgroup Configuration` During the hostgroup config we support different security groups per hostgroup.
+
+`Configure Ambari Database` In case you have an existing DB (like RDS) you can reuse it
