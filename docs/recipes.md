@@ -16,7 +16,7 @@ To add recipe via the web UI, in the **manage recipes** section, choose **create
 To add recipe via shell, use the following command:
 
 ```
-recipe store --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script
+recipe create --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script
 ```
 
 This command has optional parameters:
