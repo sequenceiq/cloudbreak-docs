@@ -32,8 +32,8 @@ cbd start
 
 Upgrading from version `1.4.0` to newer versions (`1.5.0` or `1.6.0`) doesn't require any manual modification from the users.
 
-If the Cloudbreak has been updated from `1.3.0` to `1.4.0` version then existing clusters need to be updated to be still managable through Cloudbreak.
-To update existing clusters from `1.3.0` to `1.4.0` version, run the following commands on the `cbgateway` node of the cluster:
+If Cloudbreak has been updated from `1.3.0` to `1.4.0` version then existing clusters need to be updated to be still managable through Cloudbreak.
+To update existing clusters from `1.3.0` to `1.4.0` or newer versions, run the following commands on the `cbgateway` node of the cluster:
 
 - Update the version of the Salt-Bootsrap tool on the nodes:
 ```
