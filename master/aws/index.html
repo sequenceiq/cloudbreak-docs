@@ -805,7 +805,6 @@ the AWS Console CloudFormation page.
 <p><code>Use dedicated instances</code> You can use <a href="https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/">dedicated instances</a> on EC2</p>
 <p><code>Minimum cluster size</code> The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.</p>
 <p><code>Validate blueprint</code> This is selected by default. Cloudbreak validates the Ambari blueprint in this case.</p>
-<p><code>Shipyard enabled cluster</code> This is selected by default. Cloudbreak will start a <a href="https://shipyard-project.com/">Shipyard</a> container which helps you to manage your containers.</p>
 <p><code>Config recommendation strategy</code> Strategy for configuration recommendations how will be applied. Recommended 
 configurations gathered by the response of the stack advisor. </p>
 <ul>
@@ -817,8 +816,10 @@ configurations gathered by the response of the stack advisor. </p>
 <ul>
 <li><code>Disable S3 Access By Default</code>               Cluster will not be able to reach S3 buckets.</li>
 <li><code>Create Role For S3 Access</code>                  The Cloudformation template will create a new role and assign to every instance.</li>
-<li><code>Define Existing Role For S3 Access</code>         Cluster will use the predefined instance role. You should define the role in the <code>Role for S3 connection</code> box</li>
+<li><code>Define Existing Role For S3 Access</code>         Cluster will use the predefined instance role. You should define the role ARN in the <code>Role for S3 connection</code> box.</li>
 </ul>
+<p><code>Hostgroup Configuration</code> During the hostgroup config we support different security groups per hostgroup.</p>
+<p><code>Configure Ambari Database</code> In case you have an existing DB (like RDS) you can reuse it</p>
 <h2 id="cluster-termination">Cluster Termination</h2>
 <p>You can terminate running or stopped clusters with the <code>terminate</code> button in the cluster details.</p>
 <blockquote>
