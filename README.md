@@ -6,6 +6,8 @@ Follow these steps
 
 - [ ] Change sitename in [mkdocs.yml](https://github.com/sequenceiq/cloudbreak-docs/blob/master/mkdocs.yml#L1)
 - [ ] Refresh image references: `make update-images`
+- [ ] Refresh on-prem version in curl instructions: [onprem.md](https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/onprem.md#install-cloudbreak-deployer-1)
+- [ ] Refresh Azure template reference: [setup.md](https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/azure/setup.md#deploy-using-the-azure-portal)
 - [ ] Update  where the **latest** version dropdown should point: [circle.yml](https://github.com/sequenceiq/cloudbreak-docs/blob/master/circle.yml#L20)
 - [ ] Cut a new  branch `release-x.y.z`
 
