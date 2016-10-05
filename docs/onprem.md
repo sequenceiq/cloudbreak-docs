@@ -28,7 +28,7 @@ Make sure that the following ports are open:
 * SSH (22)
 * Cloudbreak API (8080)
 * Identity server (8089)
-* Cloudbreak GUI (3000)
+* Cloudbreak GUI (443)
 * User authentication (3001)
 
 #### Root Access  

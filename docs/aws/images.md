@@ -11,7 +11,7 @@ Make sure that you have opened the following ports on your [security group](http
  * SSH (22)
  * Cloudbreak API (8080)
  * Identity server (8089)
- * Cloudbreak UI (3000)
+ * Cloudbreak UI (443)
  * User authentication (3001) 
 
  
