@@ -9,7 +9,7 @@
         <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/database/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Migration - Cloudbreak 1.3.0</title>
+	<title>Ambari Database - Cloudbreak 1.3.0</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -85,6 +85,12 @@
                         
                             
 <li >
+    <a href="../issues/">Known Issues</a>
+</li>
+
+                        
+                            
+<li >
     <a href="../changelog/">Change Log</a>
 </li>
 
@@ -136,6 +142,12 @@
                         
                             
 <li >
+    <a href="../update/">Update Cloudbreak</a>
+</li>
+
+                        
+                            
+<li >
     <a href="../ui_account/">Account Management</a>
 </li>
 
@@ -148,25 +160,43 @@
                         
                             
 <li >
+    <a href="../recipes/">Recipes</a>
+</li>
+
+                        
+                            
+<li >
     <a href="../blueprints/">Blueprints</a>
 </li>
 
                         
                             
 <li >
-    <a href="../topologies/">Platforms (TP)</a>
+    <a href="../topologies/">Platforms</a>
 </li>
 
                         
                             
 <li >
-    <a href="../kerberos/">Kerberos (TP)</a>
+    <a href="../images/">Cloud Images</a>
 </li>
 
                         
                             
 <li >
-    <a href="../mesos/">Mesos (TP)</a>
+    <a href="../kerberos/">Kerberos</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Ambari Database</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mesos/">Mesos</a>
 </li>
 
                         
@@ -178,13 +208,7 @@
                         
                             
 <li >
-    <a href="../operations/">Operations</a>
-</li>
-
-                        
-                            
-<li class="active">
-    <a href="./">Migration</a>
+    <a href="../operations/">Basic Operations</a>
 </li>
 
                         
@@ -215,12 +239,6 @@
   </li>
 
                         
-                            
-<li >
-    <a href="../issues/">Known issues</a>
-</li>
-
-                        
                         </ul>
                     </li>
                 
@@ -242,12 +260,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../operations/">
+                        <a rel="next" href="../kerberos/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../configuration/">
+                        <a rel="prev" href="../mesos/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -272,7 +290,13 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#migrate-the-databases">Migrate the databases</a></li>
+        <li class="main active"><a href="#ambari-database">Ambari Database</a></li>
+        
+            <li><a href="#important-considerations">Important Considerations</a></li>
+        
+            <li><a href="#configure-database-with-the-web-ui">Configure Database with the Web UI</a></li>
+        
+            <li><a href="#configure-database-with-the-shell">Configure Database with the Shell</a></li>
         
     
     </ul>
@@ -280,19 +304,48 @@
                 <div class="col-md-9" role="main">
                     
 
-<h1 id="migrate-the-databases">Migrate the databases</h1>
-<p>Create the database schema or migrate it to the latest version:</p>
-<pre><code>cbd startdb
-cbd migrate cbdb up
+<h1 id="ambari-database">Ambari Database</h1>
+<p>By default, Ambari uses an embedded database to store data. However, Ambari and Cloudbreak don't perform backups of this database, so although this database is sufficient for ephemeral or test clusters, it is not be sufficient for long-running production clusters. Therefore, you may need to configure a remote database for Ambari in Cloudbreak.  </p>
+<p>You have two options for configuring a remote database: you can set up a supported database on your own or use a cloud provider's database service. Next, you need to pass the details to Cloudbreak during cluster creation, and Cloudbreak will configure Ambari to connect to that remote database. </p>
+<p>Cloudbreak supports out of the box PostgreSQL, MariaDB and MySQL. This means that if you are using any of these databases, you only need to create the database itself and configure user permissions to create the cluster. Cloudbreak will initialize database tables, relations, default values, and will download JDBC driver for Ambari. For other databases, you have to execute create SQL on your database and deliver JDBC driver to <code>/opt/jdbc-drivers</code> directory on Ambari server node.</p>
+<h2 id="important-considerations">Important Considerations</h2>
+<p>Consider these constraints when setting up your remote datatabse:   </p>
+<ul>
+<li>Cloudbreak doesn't validate the database connection, so wrong connection parameters will cause the cluster installation to fail.</li>
+<li>Your database must be available to the Ambari server. Note that:<ul>
+<li>The database must be located in the same region as the Ambari cluster. Slow database connection will cause cluster installation fail.</li>
+<li>The database could be on a public server with firewall protection, but for security reasons we suggest that you use a private virtual network with subnet, and configure the Cloudbreak network to use existing resources.</li>
+</ul>
+</li>
+<li>For the supported out of the box databases, Cloudbreak creates the tables and upgrades Ambari if neccessary, but performing any other operations on the database is your responsibility.</li>
+<li>If you selected PostgreSQL, Ambari must use the <code>public</code> schema. It is not possible to configure a different schema.</li>
+<li>Database name, username, and password should not contain the <code>'</code> character. Other special characters are allowed.</li>
+</ul>
+<h2 id="configure-database-with-the-web-ui">Configure Database with the Web UI</h2>
+<p>You can find database configuration in the <strong><em>Configure Ambari Database</em></strong> tab, under <strong><em>Advanced options</em></strong>:</p>
+<p><img alt="" src="../images/ambari-database.png" />
+<sub><em>Full size <a href="../images/ambari-database.png">here</a>.</em></sub></p>
+<h2 id="configure-database-with-the-shell">Configure Database with the Shell</h2>
+<p>To configure a remote database for Ambari with Cloudbreak shell, use <code>database configure</code> command before <code>cluster create</code> command. The syntax is:</p>
+<pre><code>database configure --vendor [vendor] --host [host-or-ip] --port [port] --name [database-name] --username [user-name] --password [password]
 </code></pre>
 
-<p>Verify that all scripts have been applied:</p>
-<pre><code>cbd migrate cbdb status
-</code></pre>
-
-<pre><code>cbd generate
-cbd migrate cbdb up
-</code></pre>
+<p>Accepted <code>vendor</code> values are:</p>
+<ul>
+<li>MARIADB</li>
+<li>MSSQL</li>
+<li>MYSQL</li>
+<li>ORACLE</li>
+<li>POSTGRES</li>
+<li>SQLANYWHERE</li>
+</ul>
+<h3 id="upgrade-the-jdbc-driver">Upgrade the JDBC Driver</h3>
+<p>During installation, Cloudbreak distributes the JDBC driver for Ambari to different locations. If you want to upgrade the driver or use a different one, you have to perform these steps:</p>
+<ol>
+<li>Copy the driver to the <code>/var/lib/ambari-server/jdbc-drivers</code> directory.</li>
+<li>Symlink the driver to <code>/usr/share/java</code>, <code>/usr/lib/jvm/java/jre/lib/ext</code> directories.</li>
+<li>Reconfigure Ambari by executing the <code>ambari-server setup --jdbc-db=[db-vendor] --jdbc-driver=[driver-location]</code> command.</li>
+</ol>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/database.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             

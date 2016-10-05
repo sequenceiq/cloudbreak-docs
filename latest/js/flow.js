@@ -13,11 +13,13 @@ var flows = {
     "ClusterUpscaleFlowConfig" : "Cluster upscale flow",
     "StackUpscaleConfig" : "Stack upscale flow",
     "StackDownscaleConfig" : "Stack downscale flow",
-    "ClusterTerminationFlowConfig" : "Cluster temination flow",
-    "StackTerminationFlowConfig" : "Stack temination flow",
-    "InstanceTerminationFlowConfig" : "Instance temination flow",
+    "ClusterTerminationFlowConfig" : "Cluster termination flow",
+    "StackTerminationFlowConfig" : "Stack termination flow",
+    "InstanceTerminationFlowConfig" : "Instance termination flow",
     "ClusterStartFlowConfig" : "Cluster start flow",
-    "ClusterStopFlowConfig" : "Cluster stop flow"
+    "ClusterStopFlowConfig" : "Cluster stop flow",
+    "ClusterResetFlowConfig" : "Cluster reinstall flow",
+    "ClusterCredentialChangeFlowConfig" : "Ambari user/password change flow"
 };
 
 var initGraphByDot = function(dot) {
