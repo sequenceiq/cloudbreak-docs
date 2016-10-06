@@ -1,4 +1,4 @@
-site_name: Cloudbreak 1.2.0
+site_name: Cloudbreak 1.3.0
 site_url: http://sequenceiq.com/cloudbreak-docs
 repo_url: https://github.com/sequenceiq/cloudbreak-docs
 theme: mkdocs
@@ -12,6 +12,7 @@ pages:
         - Architecture : architecture.md
         - Installation : onprem.md
         - Release Notes : releasenotes.md
+        - Known Issues: issues.md
         - Change Log : changelog.md
     - AWS: aws.md
     - Azure : azure.md
@@ -20,16 +21,19 @@ pages:
     - Reference:
         - API : api.md
         - CLI/Shell : shell.md
+        - Update Cloudbreak: update.md
         - Account Management: ui_account.md
         - Auto-Scaling : periscope.md
-        - SSSD Configuration: sssd.md
         - Recipes: recipes.md
         - Blueprints : blueprints.md
         - Platforms : topologies.md
+        - Cloud Images: images.md
         - Kerberos: kerberos.md
+        - Ambari Database: database.md
+        - Mesos: mesos.md
         - SPI: spi.md
-        - Operations : operations.md
-        - Migration : database.md
+        - Basic Operations : operations.md
         - Advanced Configuration : configuration.md
-        - Development : development.md
-        - Known issues: issues.md
+        - Development :
+            - Environments : environments.md
+            - Flows : flow.html

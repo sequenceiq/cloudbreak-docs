@@ -2,17 +2,17 @@
 
 {!docs/gcp/images.md!}
 
-# Google Setup
+# Cloudbreak Deployer Setup on Google
 
 {!docs/gcp/deployer.md!}
 
-# Provisioning Prerequisites
+# Cluster Provisioning Prerequisites
 
 {!docs/gcp/access_setup.md!}
 
 {!docs/common/sshkey.md!}
 
-# Provisioning via Browser
+# Cluster Provisioning via Browser
 
 {!docs/gcp/ui/short.md!}
 
@@ -26,8 +26,6 @@
 
 {!docs/blueprint/short_blueprint.md!}
 
-{!docs/recipe/short_recipe.md!}
-
 {!docs/gcp/ui/create.md!}
 
 {!docs/gcp/ui/terminate.md!}
@@ -36,9 +34,28 @@
 
 {!docs/shell/short_shell.md!}
 
-# Provisioning via CLI
+# Cluster Provisioning via CLI
 
-{!docs/gcp/shell/shell.md!}
+{!docs/gcp/shell/credential.md!}
 
-**Congratulations!** Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
-provisioning, we have some [interesting insights](operations.md) for you.
+{!docs/gcp/shell/template.md!}
+
+{!docs/gcp/shell/network.md!}
+
+{!docs/shell/blueprint.md!}
+
+{!docs/shell/metadata.md!}
+
+{!docs/gcp/shell/create.md!}
+
+{!docs/shell/stop.md!}
+
+{!docs/shell/restart.md!}
+
+{!docs/shell/upscale.md!}
+
+{!docs/shell/terminate.md!}
+
+{!docs/shell/silent.md!}
+
+{!docs/gcp/shell/example.md!}

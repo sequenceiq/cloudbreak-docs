@@ -2,17 +2,17 @@
 
 {!docs/aws/images.md!}
 
-# Aws Setup
+# Cloudbreak Deployer Setup on AWS
 
 {!docs/aws/deployer.md!}
 
-# Provisioning Prerequisites
+# Cluster Provisioning Prerequisites
 
 {!docs/aws/iamrole.md!}
 
 {!docs/common/sshkey.md!}
 
-# Provisioning via Browser
+# Cluster Provisioning via Browser
 
 {!docs/aws/ui/short.md!}
 
@@ -26,8 +26,6 @@
 
 {!docs/blueprint/short_blueprint.md!}
 
-{!docs/recipe/short_recipe.md!}
-
 {!docs/aws/ui/create.md!}
 
 {!docs/aws/ui/termination.md!}
@@ -36,10 +34,29 @@
 
 {!docs/shell/short_shell.md!}
 
-# Provisioning via CLI
+# Cluster Provisioning via CLI
 
-{!docs/aws/shell/shell.md!}
+{!docs/aws/shell/credential.md!}
 
-**Congratulations!** Your cluster should now be up and running on this way as well. To learn more about Cloudbreak and 
-provisioning, we have some [interesting insights](operations.md) for you.
+{!docs/aws/shell/template.md!}
+
+{!docs/aws/shell/network.md!}
+
+{!docs/shell/blueprint.md!}
+
+{!docs/shell/metadata.md!}
+
+{!docs/aws/shell/create.md!}
+
+{!docs/shell/stop.md!}
+
+{!docs/shell/restart.md!}
+
+{!docs/shell/upscale.md!}
+
+{!docs/shell/terminate.md!}
+
+{!docs/shell/silent.md!}
+
+{!docs/aws/shell/example.md!}
 

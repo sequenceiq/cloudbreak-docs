@@ -1,4 +1,4 @@
-## Setting up AWS credentials
+## Setting up AWS Credentials
 
 Cloudbreak works by connecting your AWS account through so called *Credentials*, and then uses these credentials to 
 create resources on your behalf. The credentials can be configured on the **manage credentials** panel on the 
@@ -13,7 +13,7 @@ To create a new AWS credential follow these steps:
   4. Copy your SSH public key to the `SSH public key` field
     - The SSH public key must be in OpenSSH format and it's private keypair can be used later to [SSH onto every 
     instance](operations.md#ssh-to-the-hosts) of every cluster you'll create with this credential.
-    - The **SSH username** for the EC2 instances is **ec2-user**.
+    - The **SSH username** for the EC2 instances is **cloudbreak**.
 
 >Any other parameter is optional here.
 

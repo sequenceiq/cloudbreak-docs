@@ -1,14 +1,10 @@
-## Cluster deployment
+## Cluster Deployment
 
 After all the cluster resources are configured you can deploy a new HDP cluster.
 
 Here is a **basic flow for cluster creation on Cloudbreak Web UI**:
 
  - Start by selecting a previously created AWS credential in the header.
-
-![](/images/ui-credentials_v2.png)
-<sub>*Full size [here](/images/ui-credentials_v2.png).*</sub>
-
  - Open `create cluster`
 
 `Configure Cluster` tab
@@ -35,7 +31,10 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
  - After you've selected a `Blueprint`, you should be able to configure:
     - the templates
     - the number of nodes for all of the host groups in the blueprint
-    - the recipes for nodes
+ - You need to select where you want to install the Ambari server to. Only 1 host group can be selected.
+   If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
+   which contains only 1 service: HDFS_CLIENT and select this host group for the Ambari server. Note: this host group cannot be scaled so 
+   it is not advised to select a 'slave' host group for this purpose.
  - Click on the `Review and Launch` button
 
 `Review and Launch` tab
@@ -52,9 +51,13 @@ Besides these you can check the progress on the Cloudbreak Web UI itself if you 
 ![](/images/ui-eventhistory_v3.png)
 <sub>*Full size [here](/images/ui-eventhistory_v3.png).*</sub>
 
-**Advanced options**
+#### Advanced Options
 
 There are some advanced features when deploying a new cluster, these are the following:
+
+`Ambari Username` This user will be used as admin user in Ambari. You can log in using this username on the Ambari UI.
+
+`Ambari Password` The password associated with the Ambari username. This password will be also the default password for all required passwords which are not specified in the blueprint. E.g: hive DB password.
 
 `Availability Zone` You can restrict the instances to a [specific availability zone](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html). It may be useful if you're using
  reserved instances.
@@ -72,4 +75,12 @@ configurations gathered by the response of the stack advisor.
 * `ONLY_STACK_DEFAULTS_APPLY` Applies only on the default configurations for all included services.
 * `ALWAYS_APPLY`              Applies on all configuration properties.
 
-`Start LDAP and configure SSSD` Enables the [System Security Services Daemon](sssd.md) configuration.
+`Seamless S3 Access` Cluster will be able to reach S3 buckets without any configuration.
+
+* `Disable S3 Access By Default`               Cluster will not be able to reach S3 buckets.
+* `Create Role For S3 Access`                  The Cloudformation template will create a new role and assign to every instance.
+* `Define Existing Role For S3 Access`         Cluster will use the predefined instance role. You should define the role ARN in the `Role for S3 connection` box.
+
+`Hostgroup Configuration` During the hostgroup config we support different security groups per hostgroup.
+
+`Configure Ambari Database` In case you have an existing DB (like RDS) you can reuse it

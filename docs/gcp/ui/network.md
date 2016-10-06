@@ -1,4 +1,4 @@
-**Networks**
+#### Networks
 
 Your clusters can be created in their own **networks** or in one of your already existing one. If you choose an 
 existing network, it is possible to create a new subnet within the network. The subnet's IP range must be defined in 
@@ -13,12 +13,18 @@ Cloudbreak clusters. It will create a new network with a `10.0.0.0/16` subnet ev
 *Custom GCP Network*
 
 If you'd like to deploy a cluster to a custom network you'll have to **create a new network** template on the **manage 
-networks** panel. You can define the `Virtual Network Identifier` of your network.
+networks** panel.
 
-`Virtual Network Identifier` is an optional value. This must be an ID of an existing GCP virtual network. If the 
-identifier is provided, the subnet CIDR will be ignored and the existing network's CIDR range will be used.
+You have the following options:
 
->**IMPORTANT** Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
+* **Create a new virtual network and a new subnet**: Every time a cluster is created with this kind of network setup a new virtual network and a new subnet with the specified IP range will be created for the instances on Google Cloud.
+* **Create a new subnet in an existing virtual network**: Use this kind of network setup if you already have a virtual network on Google Cloud where you'd like to put the Cloudbreak created cluster but you'd like to have a separate subnet for it.
+* **Use an existing subnet in an existing virtual network**: Use this kind of network setup if you have an existing virtual network with one or more subnets on Google Cloud and you'd like to start the instances of a cluster in one of those subnets. __*Important constraints of the following parameters:*__
+    * `Don't create public IPs`: Please make sure that Cloudbreak can access the launched instances and the instances can reach the internet
+    * `Don't create new firewall rules`: Please make sure that the created instances in the subnet can reach each other (open every port in the subnet)
+* **Use a legacy network without subnets**: Use this kind of network setup if you have a legacy virtual network on Google Cloud that doesn't have subnet support and you'd like to start instances in that virtual network directly.
+
+>**IMPORTANT:** Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
  network, because of the validation only happens after the cluster creation starts.
 
 >In case of existing subnet make sure you have enough room within your network space for the new instances. The 
@@ -27,8 +33,8 @@ provided subnet CIDR will be ignored, but a proper CIDR range will be used.
 If `Public in account` is checked all the users belonging to your account will be able to use this network template 
 to create clusters, but cannot delete it.
 
->**NOTE** The new networks are created on GCP only after the the cluster provisioning starts with the selected 
+>**NOTE:** The new networks are created on GCP only after the the cluster provisioning starts with the selected 
 network template.
 
-![](/gcp/images/gcp-network.png)
-<sub>*Full size [here](/gcp/images/gcp-network.png).*</sub>
+![](/gcp/images/gcp-network_v2.png)
+<sub>*Full size [here](/gcp/images/gcp-network_v2.png).*</sub>
