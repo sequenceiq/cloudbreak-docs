@@ -14,7 +14,6 @@ Make sure that you have opened the following ports on your [security group](http
  * Cloudbreak UI (3000)
  * User authentication (3001) 
 
- 
 ## Cloudbreak Deployer AWS Image Details
 
 ## VM Requirements
