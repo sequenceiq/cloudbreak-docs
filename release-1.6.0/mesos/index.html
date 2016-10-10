@@ -454,7 +454,7 @@ guess it. If <code>cbd</code> cannot get the IP address during the initializatio
 <p>To be able to use the Docker containerizer, Docker must be installed on all the Mesos slave nodes. To install Docker, follow the instructions in their documentation <a href="https://docs.docker.com/engine/installation/">here</a>.</p>
 <p>After Docker is installed, it can be configured for the Mesos slave, by adding the <a href="http://mesos.apache.org/documentation/latest/docker-containerizer/">Docker containerizer</a> to each Mesos slave configuration. To configure it, add <code>docker,mesos</code> to the file <code>/etc/mesos-slave/containerizers</code> on each of the slave nodes (or start mesos-slave with the <code>--containerizers=mesos,docker</code> flag, or set the environment variable MESOS_CONTAINERIZERS="mesos,docker"). You may also want to increase the executor timeout to 10 mins by adding <code>10mins</code> to <code>/etc/mesos-slave/executor_registration_timeout</code> because it will allow time for pulling large Docker images.</p>
 <h1 id="provisioning-via-browser">Provisioning via Browser</h1>
-<p>You can log into the Cloudbreak application at <code>http://&lt;PUBLIC_IP&gt;:3000</code>.</p>
+<p>You can log into the Cloudbreak application at <code>https://&lt;PUBLIC_IP&gt;</code>.</p>
 <p>The main goal of the Cloudbreak UI is to easily create clusters on your own cloud provider, or on your existing Mesos cluster.
 This description details the Mesos setup - if you'd like to use a different cloud provider check out its manual.</p>
 <p>This document explains the four steps that need to be followed to create Cloudbreak clusters from the UI:</p>

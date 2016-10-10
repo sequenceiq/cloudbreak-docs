@@ -320,7 +320,7 @@ cbd init
 cbd start  
 </code></pre>
 
-<p><strong>Step 3:</strong> If Cloudbreak starts correctly, Cloudbreak application will be available at http://192.168.59.103:3000. For more details and config parameters, check the documentation for <a href="https://github.com/sequenceiq/cloudbreak-deployer">Cloudbreak Deployer</a>.</p>
+<p><strong>Step 3:</strong> If Cloudbreak starts correctly, Cloudbreak application will be available at https://192.168.59.103. For more details and config parameters, check the documentation for <a href="https://github.com/sequenceiq/cloudbreak-deployer">Cloudbreak Deployer</a>.</p>
 <p><strong>Step 4:</strong> Note that the deployer has generated a <code>certs</code> directory under <code>cbd-local</code> directory. You will need it later to set up the IDEA.</p>
 <p><strong>Step 5:</strong> Next, edit the <code>cbd-local/Profile</code> file, adding the CB_SCHEMA_SCRIPTS_LOCATION environment variable which configures the location of SQL scripts that are in the 'core/src/main/resources/schema' directory in the cloned Cloudbreak git repository. Note that the full path needs to be configured and env variables such as <code>$USER</code> cannot be used.</p>
 <pre><code>export CB_SCHEMA_SCRIPTS_LOCATION=/Users/myusername/prj/cloudbreak/core/src/main/resources/schema
