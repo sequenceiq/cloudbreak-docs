@@ -118,25 +118,25 @@
     </url>
         
     <url>
-     <loc>http://sequenceiq.com/cloudbreak-docs/topologies/</loc>
-     <lastmod>2016-10-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
      <loc>http://sequenceiq.com/cloudbreak-docs/images/</loc>
      <lastmod>2016-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>http://sequenceiq.com/cloudbreak-docs/kerberos/</loc>
+     <loc>http://sequenceiq.com/cloudbreak-docs/database/</loc>
      <lastmod>2016-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>http://sequenceiq.com/cloudbreak-docs/database/</loc>
+     <loc>http://sequenceiq.com/cloudbreak-docs/topologies/</loc>
+     <lastmod>2016-10-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://sequenceiq.com/cloudbreak-docs/kerberos/</loc>
      <lastmod>2016-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
