@@ -942,7 +942,7 @@ file...etc.</strong> to here. You can refer to these files with their names from
 <h2 id="autocomplete-and-hints">Autocomplete and Hints</h2>
 <p>Cloudbreak Shell helps to you with <strong>hint messages</strong> from the very beginning, for example:</p>
 <pre><code>cloudbreak-shell&gt;hint
-Hint: Add a blueprint with the 'blueprint add' command or select an existing one with 'blueprint select'
+Hint: Add a blueprint with the 'blueprint create' command or select an existing one with 'blueprint select'
 cloudbreak-shell&gt;
 </code></pre>
 
@@ -1053,7 +1053,7 @@ Blueprints can be added from file or URL (an <a href="https://raw.githubusercont
 <blockquote>
 <p><strong>NOTE:</strong> It is not necessary to define all the configuration in the blueprint. If a configuration is missing, Ambari will fill that with a default value.</p>
 </blockquote>
-<pre><code>blueprint add --name my-blueprint --description &quot;sample description&quot; --file &lt;the path of the blueprint&gt;
+<pre><code>blueprint create --name my-blueprint --description &quot;sample description&quot; --file &lt;the path of the blueprint&gt;
 </code></pre>
 
 <p>Other available options:</p>
@@ -1096,8 +1096,8 @@ template. Usually we create instance groups for host groups in the blueprint. Fo
 If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
 which contains only 1 service: HDFS_CLIENT and select this host group for the Ambari server. Note: this host group cannot be scaled so
 it is not advised to select a 'slave' host group for this purpose.</p>
-<pre><code>instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-aws --ambariServer true
-instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-aws --ambariServer false
+<pre><code>instancegroup configure --instanceGroup master --nodecount 1 --templateName minviable-aws --securityGroupName all-services-port --ambariServer true
+instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName minviable-aws --securityGroupName all-services-port --ambariServer false
 </code></pre>
 
 <p>Other available option:</p>
@@ -1105,11 +1105,6 @@ instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName min
 <h4 id="select-network">Select Network</h4>
 <p>Select one of your previously created network which fits your needs or a default one:</p>
 <pre><code>network select --name default-azure-network
-</code></pre>
-
-<h4 id="select-security-group">Select Security Group</h4>
-<p>Select one of your previously created security which fits your needs or a default one:</p>
-<pre><code>securitygroup select --name all-services-port
 </code></pre>
 
 <h4 id="create-stack-create-cloud-infrastructure">Create Stack / Create Cloud Infrastructure**</h4>
@@ -1204,7 +1199,7 @@ stack stop
 
 <h2 id="cluster-termination_1">Cluster Termination</h2>
 <p>You can terminate running or stopped clusters with</p>
-<pre><code>stack terminate --name myawsstack
+<pre><code>stack delete --name myawsstack
 </code></pre>
 
 <p>Other available option is <code>--wait</code> - in this case the terminate command will return only after the process has finished. </p>
@@ -1243,13 +1238,12 @@ credential select --name myazurecredential
 template create --AZURE --name azuretemplate --description azure-template --instanceType Standard_D3 --volumeSize 100 
 --volumeCount 2
 blueprint select --name hdp-small-default
-instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName azuretemplate --ambariServer true
-instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName azuretemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName azuretemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName azuretemplate --ambariServer false
-instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName azuretemplate --ambariServer false
+instancegroup configure --instanceGroup host_group_master_1 --nodecount 1 --templateName azuretemplate --securityGroupName all-services-port --ambariServer true
+instancegroup configure --instanceGroup host_group_master_2 --nodecount 1 --templateName azuretemplate --securityGroupName all-services-port --ambariServer false
+instancegroup configure --instanceGroup host_group_master_3 --nodecount 1 --templateName azuretemplate --securityGroupName all-services-port --ambariServer false
+instancegroup configure --instanceGroup host_group_client_1  --nodecount 1 --templateName azuretemplate --securityGroupName all-services-port --ambariServer false
+instancegroup configure --instanceGroup host_group_slave_1 --nodecount 3 --templateName azuretemplate --securityGroupName all-services-port --ambariServer false
 network select --name default-azure-network
-securitygroup select --name all-services-port
 stack create --AZURE --name my-first-stack --region &quot;West US&quot; --wait true
 cluster create --description &quot;My first cluster&quot; --wait true
 </code></pre>
