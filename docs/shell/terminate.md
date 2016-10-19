@@ -3,7 +3,7 @@
 You can terminate running or stopped clusters with
 
 ```
-stack terminate --name myawsstack
+stack delete --name myawsstack
 ```
 Other available option is `--wait` - in this case the terminate command will return only after the process has finished. 
 
