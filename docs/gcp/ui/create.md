@@ -19,7 +19,6 @@ Here is a **basic flow for cluster creation on Cloudbreak Web UI**:
 
 `Setup Network and Security` tab
 
- - Select one of the networks
  - Select one of the security groups
  - Click on the `Choose Blueprint` button
 >If `Enable security` is checked as well, Cloudbreak will install Key Distribution Center (KDC) and the cluster will 
@@ -30,6 +29,7 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
  - Select one of the blueprint
  - After you've selected a `Blueprint`, you should be able to configure:
     - the templates
+    - the securitygroups
     - the number of nodes for all of the host groups in the blueprint
  - You need to select where you want to install the Ambari server to. Only 1 host group can be selected.
    If you want to install the Ambari server to a separate node, you need to extend your blueprint with a new host group
