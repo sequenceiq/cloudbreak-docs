@@ -989,7 +989,7 @@ instancegroup configure --instanceGroup slave_1 --nodecount 1 --templateName min
 (<code>credential</code>, <code>instancegroups</code>, <code>network</code>, <code>securitygroup</code>). Same as in case of the API or UI the new cluster will 
 use your templates and by using GCP will launch your cloud stack. Use the following command to create a 
 stack to be used with your Hadoop cluster:</p>
-<pre><code>stack create --name mygcpstack --region us-central1
+<pre><code>stack create --GCP --name mygcpstack --region us-central1
 </code></pre>
 
 <p>The infrastructure is created asynchronously, the state of the stack can be checked with the stack <code>show command</code>. If 
