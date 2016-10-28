@@ -35,5 +35,4 @@ pages:
         - Basic Operations : operations.md
         - Advanced Configuration : configuration.md
         - Development :
-            - Environments : environments.md
             - Flows : flow.html
