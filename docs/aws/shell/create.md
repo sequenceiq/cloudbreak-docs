@@ -55,7 +55,7 @@ Other available option is:
 
 `--wait` - in this case the create command will return only after the process has finished. 
 `--instanceProfileStrategy` - strategy for seamless S3 connection. (CREATE, USE_EXISTING)
-`--s3Role` - If you selected 'USE_EXISTING' strategy then you should define the S3 role which will be assigned to instances.
+`--instanceProfile` - If you selected 'USE_EXISTING' strategy then you should define the Instance Profile role which will be assigned to instances.
 
 #### Create a Hadoop Cluster / Cloud Provisioning
 

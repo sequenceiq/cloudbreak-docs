@@ -75,11 +75,11 @@ configurations gathered by the response of the stack advisor.
 * `ONLY_STACK_DEFAULTS_APPLY` Applies only on the default configurations for all included services.
 * `ALWAYS_APPLY`              Applies on all configuration properties.
 
-`Seamless S3 Access` Cluster will be able to reach S3 buckets without any configuration.
+`Instance Profile` Cluster will be able to communicate with AWS api without any configuration.
 
-* `Disable S3 Access By Default`               Cluster will not be able to reach S3 buckets.
-* `Create Role For S3 Access`                  The Cloudformation template will create a new role and assign to every instance.
-* `Define Existing Role For S3 Access`         Cluster will use the predefined instance role. You should define the role ARN in the `Role for S3 connection` box.
+* `Disable Instance Profile attaching by default`               		Cluster will not be able to communicate with AWS api.
+* `Create Instance Profile and attach to the instances`                 The Cloudformation template will create a new role and assign to every instance.
+* `Define Existing Instance Profile and attach to the instances`        Cluster will use the predefined instance role. You should define the role ARN in the `Role for Instance Profile` box.
 
 `Hostgroup Configuration` During the hostgroup config we support different security groups per hostgroup.
 
