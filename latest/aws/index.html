@@ -803,11 +803,11 @@ configurations gathered by the response of the stack advisor. </p>
 <li><code>ONLY_STACK_DEFAULTS_APPLY</code> Applies only on the default configurations for all included services.</li>
 <li><code>ALWAYS_APPLY</code>              Applies on all configuration properties.</li>
 </ul>
-<p><code>Seamless S3 Access</code> Cluster will be able to reach S3 buckets without any configuration.</p>
+<p><code>Instance Profile</code> Cluster will be able to communicate with AWS api without any configuration.</p>
 <ul>
-<li><code>Disable S3 Access By Default</code>               Cluster will not be able to reach S3 buckets.</li>
-<li><code>Create Role For S3 Access</code>                  The Cloudformation template will create a new role and assign to every instance.</li>
-<li><code>Define Existing Role For S3 Access</code>         Cluster will use the predefined instance role. You should define the role ARN in the <code>Role for S3 connection</code> box.</li>
+<li><code>Disable Instance Profile attaching by default</code>                       Cluster will not be able to communicate with AWS api.</li>
+<li><code>Create Instance Profile and attach to the instances</code>                 The Cloudformation template will create a new role and assign to every instance.</li>
+<li><code>Define Existing Instance Profile and attach to the instances</code>        Cluster will use the predefined instance role. You should define the role ARN in the <code>Role for Instance Profile</code> box.</li>
 </ul>
 <p><code>Hostgroup Configuration</code> During the hostgroup config we support different security groups per hostgroup.</p>
 <p><code>Configure Ambari Database</code> In case you have an existing DB (like RDS) you can reuse it</p>
@@ -1036,7 +1036,7 @@ it reports AVAILABLE, it means that the virtual machines and the corresponding i
 <p>Other available option is:</p>
 <p><code>--wait</code> - in this case the create command will return only after the process has finished. 
 <code>--instanceProfileStrategy</code> - strategy for seamless S3 connection. (CREATE, USE_EXISTING)
-<code>--s3Role</code> - If you selected 'USE_EXISTING' strategy then you should define the S3 role which will be assigned to instances.</p>
+<code>--instanceProfile</code> - If you selected 'USE_EXISTING' strategy then you should define the Instance Profile role which will be assigned to instances.</p>
 <h4 id="create-a-hadoop-cluster-cloud-provisioning">Create a Hadoop Cluster / Cloud Provisioning</h4>
 <p><strong>You are almost done! One more command and your Hadoop cluster is starting!</strong> Cloud provisioning is done once the 
 cluster is up and running. The new cluster will use your selected blueprint and install your custom Hadoop cluster 
