@@ -286,11 +286,11 @@
     
         <li class="main active"><a href="#change-log">Change Log</a></li>
         
-            <li><a href="#v161-">[v1.6.1] -</a></li>
+            <li><a href="#v161">[v1.6.1]</a></li>
         
-            <li><a href="#v160-2016-09-15">[v1.6.0] - 2016-09-15</a></li>
+            <li><a href="#v160">[v1.6.0]</a></li>
         
-            <li><a href="#v150-2016-08-31">[v1.5.0] - 2016-08-31</a></li>
+            <li><a href="#v150">[v1.5.0]</a></li>
         
             <li><a href="#v140-2016-08-12">[v1.4.0] - 2016-08-12</a></li>
         
@@ -356,7 +356,7 @@
         
             <li><a href="#v001-2015-03-18">[v0.0.1] - 2015-03-18</a></li>
         
-            <li><a href="#added_23">Added</a></li>
+            <li><a href="#added_24">Added</a></li>
         
     
     </ul>
@@ -366,36 +366,83 @@
 
 <h1 id="change-log">Change Log</h1>
 <p>The Change Log summarizes the changes in Cloudbreak.</p>
-<h2 id="v161-">[v1.6.1] -</h2>
+<h2 id="v161">[v1.6.1]</h2>
 <h3 id="fixed">Fixed</h3>
 <ul>
-<li>can send invite e-mails when authentication is not enabled</li>
-</ul>
-<h3 id="changed">Changed</h3>
-<ul>
-<li>recipe create command in shell is unified with other commands</li>
-</ul>
-<h2 id="v160-2016-09-15">[v1.6.0] - 2016-09-15</h2>
-<h3 id="fixed_1">Fixed</h3>
-<ul>
-<li>region is not a required field when posting a new stack</li>
-<li>ability to create bigger than 999 GB disks for Azure</li>
-<li>proper handling of upstart config in Salt to avoid concurrency between sysv and upstart when restarting clusters</li>
-<li>hive-site xmls are properly generated on worker nodes with default blueprints</li>
+<li>cannot send invite e-mails from Auth (aka Sultans) when smtp authentictaion is not enabled</li>
+<li>recipe shell commands was not aligned with UI and with the implementation</li>
+<li>avoid duplicated privateids for instances (they must be unique)</li>
+<li>reserve ports on OS for well known Hadoop services</li>
+<li>do not fail when there is no default VPC on AWS</li>
+<li>reserve TCP/UDP ports on OS for well-known Hadoop services</li>
+<li>invalid hostmetadata count after sync when a node from master hostgroup died</li>
+<li>shell fix to avoid error when creating cluster using templates with encrypted EBS</li>
+<li>fix concurrent removal of alerts in Autoscale (aka Periscope)</li>
+<li>ensure that the gcs-connector.sh recipe runs only one time</li>
+<li>fix multiple salt-minion start</li>
+<li>short names for OpenStack VMs to avoid MySQL / Hive failures</li>
+<li>fix uluwatu missing template volume type in some cases</li>
+<li>avoid timeouts when IPV6 is disabled https://github.com/saltstack/salt/issues/32719</li>
+<li>do not allow cluster reset when external DB is used for Ambari</li>
+<li>fix smtp related indentations in application.yml</li>
+<li>introducing resource definiton cache, to avoid read the same definition from disk multiple times</li>
+<li>invalid hdp repo config (update to 2.5 and support cnetos6 on AWS)</li>
+<li>display AWS autoscaling group errors</li>
+<li>sporadic ssh connectivity issue from on gcp</li>
+<li>no transaction for cluster update</li>
+<li>renamed s3role to instanceprofile on UI</li>
+<li>avoid alphabetical order of recipes by filename</li>
+<li>stop cluster is not possible due to invalid spot price check</li>
+<li>sporadic classpath issue, since StackServiceComponentDescriptorMapFactory returns wrong object type</li>
 </ul>
 <h3 id="added">Added</h3>
 <ul>
+<li>OpenStack Liberty and Mitaka support</li>
+<li>implement Availibility Zones for OpenStack</li>
+<li>dynamic load of custom provider definitions</li>
+<li>log every recipe by default (/var/log/recipses)</li>
+<li>eventlog about recipe execution</li>
+<li>ability to restart cluster installation in case of failed recipe</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>ambari client with sources and extra logging</li>
+<li>remove unnecessary admin user</li>
+<li>remove cloudbreak log highlighting</li>
+<li>remove unused timeout value from recipes</li>
+<li>improved logging for saltbootstrap</li>
+<li>every recipe runs only once by default</li>
+</ul>
+<h2 id="v160">[v1.6.0]</h2>
+<h3 id="fixed_1">Fixed</h3>
+<ul>
+<li>proper handling of upstart config to avoid concurrency between sysv and upstart during ambari agent / server start</li>
+<li>use m3 for dry-run check because it can be started in ec2-classic</li>
+<li>consider auto scaling activity history in auto scaling group status checker</li>
+<li>eliminate criticals reported by Sonar</li>
+<li>ability to create bigger than 999 GB size volumes on Azure</li>
+<li>fixed javascript test for nodecount</li>
+<li>region is not a required field when posting a new stack</li>
+</ul>
+<h3 id="added_1">Added</h3>
+<ul>
+<li>ARM template JSON validation</li>
+<li>added property to set static shared volume(s) in BYOS clusters</li>
+<li>generate salt password per stack</li>
+<li>added Hibernate field encryptor to encryt sensitive data in DB</li>
+<li>ability to start GCP clusterts in a NATed environment without public IP address</li>
 <li>Ambari and HDP versions are added to the /stack API call's response</li>
 <li>when deploying a new subnet in an existing VPC on AWS, the CIDR range is automatically calculated when not specified explicitly on the API</li>
-<li>ability to create clusters on GCP without public IP addresses and without firewall modifications</li>
-<li>added env variable to specify static shared volumes in Mesos clusters</li>
 </ul>
 <h3 id="changed_1">Changed</h3>
 <ul>
+<li>Cloudbreak dev version uses latest image from image catalog</li>
+<li>cleanup unnecessary pillar matchers</li>
+<li>update default blueprints to add hive clients to worker nodes</li>
+<li>API cleanup, remove invalid required fields from swagger</li>
 <li>updated Ambari version to 2.4.1.0</li>
-<li>salt password is generated per stack for salt user</li>
 </ul>
-<h2 id="v150-2016-08-31">[v1.5.0] - 2016-08-31</h2>
+<h2 id="v150">[v1.5.0]</h2>
 <h3 id="fixed_2">Fixed</h3>
 <ul>
 <li>ClusterBootstrapperTest randomly fails</li>
@@ -404,7 +451,7 @@
 <li>credential visibility on cluster details view</li>
 <li>"Keystone Version" dropdown layouts</li>
 </ul>
-<h3 id="added_1">Added</h3>
+<h3 id="added_2">Added</h3>
 <ul>
 <li>added HDP version field to RDS config</li>
 <li>ability to configure remote database for Ambari</li>
@@ -435,7 +482,7 @@
 <li>fix Ambari server ip selection on AWS</li>
 <li>fix enable auto scaling with different user</li>
 </ul>
-<h3 id="added_2">Added</h3>
+<h3 id="added_3">Added</h3>
 <ul>
 <li>new RDS config resource</li>
 <li>shell commands for RDS config operations</li>
@@ -463,7 +510,7 @@
 <li>before upscale the sync won't change the stack state</li>
 <li>upscale / downscale fix with Ambari 2.4</li>
 </ul>
-<h3 id="added_3">Added</h3>
+<h3 id="added_4">Added</h3>
 <ul>
 <li>reverse proxy for UI components</li>
 <li>new supported volume type on aws: ST1</li>
@@ -510,7 +557,7 @@
 <li>manage platforms close button on UI</li>
 <li>null pointer during router creation on non existing Openstack network</li>
 </ul>
-<h3 id="added_4">Added</h3>
+<h3 id="added_5">Added</h3>
 <ul>
 <li>use salt bootstrap instead of cloudbreak bootstrap</li>
 <li>missing gateway port to stack response</li>
@@ -560,7 +607,7 @@
 <li>slow lazy format on Azure</li>
 <li>mounted disks are not visible in containers</li>
 </ul>
-<h3 id="added_5">Added</h3>
+<h3 id="added_6">Added</h3>
 <ul>
 <li>assume role without adding the keys into cbd Profile</li>
 <li>ability to create cluster without public ip</li>
@@ -575,7 +622,7 @@
 <li>azure create network form</li>
 <li>gcp disk type</li>
 </ul>
-<h3 id="added_6">Added</h3>
+<h3 id="added_7">Added</h3>
 <ul>
 <li>GCP subnetsupport  to shell</li>
 </ul>
@@ -590,7 +637,7 @@
 <ul>
 <li>sudo right of CB user</li>
 </ul>
-<h3 id="added_7">Added</h3>
+<h3 id="added_8">Added</h3>
 <ul>
 <li>Azure default network</li>
 </ul>
@@ -611,7 +658,7 @@
 <li>docs fixed about getting default credentials (cbd login)</li>
 <li>updates cb-shell to 0.5.37 to fix ssl issues</li>
 </ul>
-<h3 id="added_8">Added</h3>
+<h3 id="added_9">Added</h3>
 <ul>
 <li>Command <code>cbd azure configure-arm</code> will create your arm application which can used by cloudbreak</li>
 <li>Command <code>cbd azure deploy-dash</code> will deploy a dash application in your Azure account</li>
@@ -646,7 +693,7 @@
 <li>Authentication error with <code>cloudbreak-shell</code> and <code>cloudbreak-shell-quiet</code> is fixed</li>
 <li>Command <code>cbd update &lt;branch&gt;</code> checks for artifact</li>
 </ul>
-<h3 id="added_9">Added</h3>
+<h3 id="added_10">Added</h3>
 <ul>
 <li>binary version of gnu-sed 4.2.2 is now included, to solve lot of osx/busybox issues</li>
 <li>consul recursor test are added</li>
@@ -663,7 +710,7 @@
 <li>consul recursor handling refactored to be more robust</li>
 </ul>
 <h2 id="v102-2015-08-25">[v1.0.2] - 2015-08-25</h2>
-<h3 id="added_10">Added</h3>
+<h3 id="added_11">Added</h3>
 <ul>
 <li><code>DOCKER_CONSUL_OPTIONS</code> config option to provide arbitrary consul option</li>
 </ul>
@@ -692,12 +739,12 @@
 <li>Fix CHANGELOG generation at <code>make release-next-ver</code> avoid inserting extra -e</li>
 </ul>
 <h2 id="v056-2015-07-23">[v0.5.6] - 2015-07-23</h2>
-<h3 id="added_11">Added</h3>
+<h3 id="added_12">Added</h3>
 <ul>
 <li>Release artifacts are published at public-repo-1.hortonworks.com/HDP/cloudbreak/</li>
 </ul>
 <h2 id="v055-2015-07-10">[v0.5.5] - 2015-07-10</h2>
-<h3 id="added_12">Added</h3>
+<h3 id="added_13">Added</h3>
 <ul>
 <li>Command <code>pull-parallel</code> added for quicker/simultaneous image pull</li>
 <li>Release process includes upload to public-repo s3 bucket</li>
@@ -708,7 +755,7 @@
 <li>release artifact includes additional files: license/readme/notes</li>
 </ul>
 <h2 id="v054-2015-07-03">[v0.5.4] - 2015-07-03</h2>
-<h3 id="added_13">Added</h3>
+<h3 id="added_14">Added</h3>
 <ul>
 <li>New <code>cbd-cleanup</code> command for removing old images or exited containers</li>
 <li>Baywatch default parameters added: <code>CB_BAYWATCH_ENABLED</code> and<code>CB_BAYWATCH_EXTERN_LOCATION</code></li>
@@ -734,7 +781,7 @@
 <li><code>cbd update</code> upstream changes on go-bahser broke the selfupdate functionality</li>
 <li>In some environment cloudbreak starts really slow. See: <a href="http://stackoverflow.com/questions/137212/how-to-solve-performance-problem-with-java-securerandom">details</a>, see: <a href="https://github.com/sequenceiq/docker-cloudbreak/commit/e00581d04fb14f28f778cf71253f2c8fa0d704ae">commit</a></li>
 </ul>
-<h3 id="added_14">Added</h3>
+<h3 id="added_15">Added</h3>
 <ul>
 <li>New release proposal can be done by <code>make release-next-ver</code></li>
 </ul>
@@ -783,7 +830,7 @@
 <ul>
 <li>Command <code>pull</code> generates yaml files in case they are missing #31</li>
 </ul>
-<h3 id="added_15">Added</h3>
+<h3 id="added_16">Added</h3>
 <ul>
 <li>Command <code>login</code> Shows Uluwatu login url and credentials</li>
 <li>Command <code>regenerate</code> deletes and generates docker-compose.yml and uaa.yml</li>
@@ -821,7 +868,7 @@
 <li>Selfupdate updates the actual running binary intead of the fixed /us/local/bin/cbd</li>
 <li>SMTP default port is 25, to fix number conversion exception</li>
 </ul>
-<h3 id="added_16">Added</h3>
+<h3 id="added_17">Added</h3>
 <ul>
 <li>Command <code>init</code> creates Profile</li>
 <li>Install cbd to a directory which is available on $PATH</li>
@@ -854,7 +901,7 @@
 <li>CircleCI mdule defines required jq</li>
 <li>Fixing PATH issue for binary deps</li>
 </ul>
-<h3 id="added_17">Added</h3>
+<h3 id="added_18">Added</h3>
 <ul>
 <li>uaadb start added</li>
 <li>identity server start added</li>
@@ -867,7 +914,7 @@
 <li>Docker containers are managed by <strong>docker-compose</strong></li>
 </ul>
 <h2 id="v007-2015-03-26">[v0.0.7] - 2015-03-26</h2>
-<h3 id="added_18">Added</h3>
+<h3 id="added_19">Added</h3>
 <ul>
 <li><code>make tests</code> runs unit tests</li>
 <li>docker unit tests are added</li>
@@ -888,7 +935,7 @@
 <ul>
 <li>removed dos2unix dependency for the update command</li>
 </ul>
-<h3 id="added_19">Added</h3>
+<h3 id="added_20">Added</h3>
 <ul>
 <li>doctor command added</li>
 <li>docker-check-version command added</li>
@@ -913,7 +960,7 @@
 <li>debug function fixed</li>
 <li>DEBUG, TRACE and CBD_DEFAULT_PROFILE env vars are inherited</li>
 </ul>
-<h3 id="added_20">Added</h3>
+<h3 id="added_21">Added</h3>
 <ul>
 <li>Profile handling added with docs</li>
 <li>One-liner install added</li>
@@ -931,17 +978,17 @@
 <ul>
 <li><code>make release</code> creates binary with X.X.X version when on release branch otherwise X.X.X-gitrev</li>
 </ul>
-<h3 id="added_21">Added</h3>
+<h3 id="added_22">Added</h3>
 <ul>
 <li>Docs: release process described</li>
 </ul>
 <h2 id="v002-2015-03-19">[v0.0.2] - 2015-03-19</h2>
-<h3 id="added_22">Added</h3>
+<h3 id="added_23">Added</h3>
 <p>Added
 - selfupdate command
 - gray debug to stderr</p>
 <h2 id="v001-2015-03-18">[v0.0.1] - 2015-03-18</h2>
-<h2 id="added_23">Added</h2>
+<h2 id="added_24">Added</h2>
 <ul>
 <li>help command added</li>
 <li>version command added</li>
