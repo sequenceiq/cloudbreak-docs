@@ -13,4 +13,4 @@ Cloudbreak requires that the  standard components are installed and configured o
 - Nova (KVM or Xen hypervisor)
 - Glance
 - Cinder (optional)
-- Heat (optional, but it is highly recommended)
+- Heat (optional, but it is highly recommended, since provisioning through native api calls will be deprecated in the future)
