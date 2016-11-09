@@ -284,7 +284,10 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#openstack-images">OpenStack Images</a></li>
+        <li class="main active"><a href="#openstack-supported-versions">OpenStack Supported Versions</a></li>
+        
+    
+        <li class="main "><a href="#openstack-images">OpenStack Images</a></li>
         
             <li><a href="#openstack-image-details">OpenStack Image Details</a></li>
         
@@ -349,6 +352,23 @@
                 <div class="col-md-9" role="main">
                     
 
+<h1 id="openstack-supported-versions">OpenStack Supported Versions</h1>
+<p>Cloudbreak was tested against the following versions od <a href="https://www.rdoproject.org">Red Hat Distribution of OpenStack</a> (RDO):</p>
+<ul>
+<li>Juno</li>
+<li>Kilo</li>
+<li>Liberty</li>
+<li>Mitaka</li>
+</ul>
+<p>Cloudbreak requires that the  standard components are installed and configured on OpenStack:</p>
+<ul>
+<li>Keystone V2 or Keystone V3</li>
+<li>Neutron (self-service and provider networking)</li>
+<li>Nova (KVM or Xen hypervisor)</li>
+<li>Glance</li>
+<li>Cinder (optional)</li>
+<li>Heat (optional, but it is highly recommended)</li>
+</ul>
 <h1 id="openstack-images">OpenStack Images</h1>
 <p>We have pre-built cloud images for OpenStack with the Cloudbreak Deployer pre-installed and with Cloudbreak
 pre-installed. Following steps will guide you through the launch of the images then the needed configuration.</p>
