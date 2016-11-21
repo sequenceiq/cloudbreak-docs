@@ -300,6 +300,8 @@
         
             <li><a href="#using-self-signed-certificates">Using Self-signed Certificates</a></li>
         
+            <li><a href="#availability-zones-and-region-config">Availability Zones and Region config</a></li>
+        
             <li><a href="#start-cloudbreak-deployer">Start Cloudbreak Deployer</a></li>
         
             <li><a href="#validate-that-cloudbreak-deployer-has-started">Validate that Cloudbreak Deployer Has Started</a></li>
@@ -448,6 +450,25 @@ guess it. If <code>cbd</code> cannot get the IP address during the initializatio
 or else Cloudbreak won't be able to communicate with your OpenStack. To import the certificate, place the certificate 
 file in the generated certs directory <code>/certs/trusted/</code>. The trusted directory does not exist by default, so you need to create it.
 Cloudbreak will automatically pick up these certificates and import them into its truststore upon start.</p>
+<h2 id="availability-zones-and-region-config">Availability Zones and Region config</h2>
+<p>By default Cloudbreak uses <code>RegionOne</code> region with <code>nova</code> avaibility zone, but OpenStack supports multiple regions and multiple availability zones. You can customize Cloudbreak deployment and enable multiple
+regions and avaibility zones by creating an <code>openstack-zone.json</code> under the <code>etc</code> directory of Cloudbreak deployment (e.g. <code>/var/lib/cloudbreak-deployment/etc/openstack-zone.json</code>).
+You can find an example of <code>openstack-zone.json</code> contaning two regions and four avaibility zones below:</p>
+<pre><code>{
+  &quot;items&quot;: [
+    {
+      &quot;name&quot;: &quot;MyRegionOne&quot;,
+      &quot;zones&quot;: [ &quot;az1&quot;, &quot;az2&quot;, &quot;az3&quot;]
+    },
+    {
+      &quot;name&quot;: &quot;MyRegionTwo&quot;,
+      &quot;zones&quot;: [ &quot;myaz&quot;]
+    }
+  ]
+}
+</code></pre>
+
+<p>If the <code>etc</code> directory does not exsist under Cloudbreak deployment directory, then please create it. Restart is needed to pick up the changes done in <code>openstack-zone.json</code> file. </p>
 <h2 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h2>
 <p>To start the Cloudbreak application, use the following command:</p>
 <pre><code>cbd start
