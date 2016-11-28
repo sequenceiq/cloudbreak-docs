@@ -1,4 +1,4 @@
-Cloudbreak was tested against the following versions od [Red Hat Distribution of OpenStack](https://www.rdoproject.org) (RDO):
+Cloudbreak was tested against the following versions of [Red Hat Distribution of OpenStack](https://www.rdoproject.org) (RDO):
 
 - Juno
 - Kilo
