@@ -64,11 +64,11 @@ There are some advanced features when deploying a new cluster, these are the fol
 
 `Use dedicated instances` You can use [dedicated instances](https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/) on EC2
 
-`Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.
+`Minimum cluster size` The provisioning strategy in case the cloud provider cannot allocate all the requested nodes.
 
 `Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 
-`Config recommendation strategy` Strategy for configuration recommendations how will be applied. Recommended 
+`Config recommendation strategy` Strategy for how configuration recommendations will be applied. Recommended 
 configurations gathered by the response of the stack advisor. 
 
 * `NEVER_APPLY`               Configuration recommendations are ignored with this option.

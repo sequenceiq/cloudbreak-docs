@@ -35,7 +35,7 @@ file...etc.** to here. You can refer to these files with their names from the sh
 
 ## Autocomplete and Hints
 
-Cloudbreak Shell helps to you with **hint messages** from the very beginning, for example:
+Cloudbreak Shell helps you with **hint messages** from the very beginning, for example:
 ```
 cloudbreak-shell>hint
 Hint: Add a blueprint with the 'blueprint create' command or select an existing one with 'blueprint select'

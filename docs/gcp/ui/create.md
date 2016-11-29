@@ -71,13 +71,13 @@ There are some advanced features when deploying a new cluster, these are the fol
 `Availability Zone` You can restrict the instances to a [specific availability zone](https://cloud.google.com/compute/docs/zones). It may be useful if you're using
  reserved instances.
 
-`Minimum cluster size` The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.
+`Minimum cluster size` The provisioning strategy in case the cloud provider cannot allocate all the requested nodes.
 
 `Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 
 `Shipyard enabled cluster` This is selected by default. Cloudbreak will start a [Shipyard](https://shipyard-project.com/) container which helps you to manage your containers.
 
-`Config recommendation strategy` Strategy for configuration recommendations how will be applied. Recommended 
+`Config recommendation strategy` Strategy for how configuration recommendations will be applied. Recommended 
 configurations gathered by the response of the stack advisor. 
 
 * `NEVER_APPLY`               Configuration recommendations are ignored with this option.
