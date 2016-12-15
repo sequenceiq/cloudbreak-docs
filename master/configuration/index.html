@@ -351,8 +351,21 @@ export CLOUDBREAK_SMTP_TYPE=smtp
 <pre><code>export CLOUDBREAK_SMTP_TYPE=smtps
 </code></pre>
 
-<h4 id="certificates">Certificates</h4>
+<h3 id="certificates">Certificates</h3>
+<h4 id="trusted-certificates">Trusted Certificates</h4>
 <p>If the certificate used by the SMTP server is self-signed or the Java's default trust store doesn't contain it, you can add it to the trust store by copying it to <code>certs/trusted</code> inside the Cloudbreak Deployer directory, and start (or restart) the Cloudbreak container (with <code>cbd start</code>). On startup, the Cloudbreak container  automatically imports the certificates in that directory to its trust store.</p>
+<h4 id="cloudbreak-certificate">Cloudbreak Certificate</h4>
+<p>If you would like to replace Cloudbreak's self-signed certificate with your own certificate then copy your certificate and the related private key under cloudbreak-deployment directory:</p>
+<pre><code>certs/traefik/mydomain.com.crt
+certs/traefik/mydomain.com.key
+</code></pre>
+
+<p>If the traefik directory does not exsist then create it. After you have coped the cert and private key file, then add the following variable into the Profile file of cbd and restart cbd.</p>
+<pre><code>export CBD_TRAEFIK_TLS=&quot;/certs/traefik/mydomain.com.crt,/certs/traefik/mydomain.com.key&quot;
+</code></pre>
+
+<p>As a best practice we recommend to replace <code>mydomain.com</code> with the actual domain what you want to use, but make sure that the actual file names and the values in <code>CBD_TRAEFIK_TLS</code> are identical.  </p>
+<p><em>Note: password protected private key files can't be used by Cloudbreak</em>  </p>
 <h3 id="access-from-custom-domains">Access from Custom Domains</h3>
 <p>Cloudbreak Deployer supports multitenancy and uses UAA as an identity provider. In UAA, multitenancy is managed through identity zones. An identity zone is accessed through a unique subdomain. For example, if the standard UAA responds to <a href="https://uaa.10.244.0.34.xip.io">https://uaa.10.244.0.34.xip.io</a>, a zone on this UAA can be accessed through a unique subdomain <a href="https://testzone1.uaa.10.244.0.34.xip.io">https://testzone1.uaa.10.244.0.34.xip.io</a>. </p>
 <p>If you want to use a custom domain for your identity or deployment, add the <code>UAA_ZONE_DOMAIN</code> line to your <code>Profile</code>:</p>
@@ -478,7 +491,7 @@ export CB_GCP_HOSTKEY_VERIFY=true
                $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
-               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
+               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbreak Deployer. Set the following environment variables for the OpenStack image import:</p>');
                $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 

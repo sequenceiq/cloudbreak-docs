@@ -539,7 +539,7 @@ infrastructure:</p>
 <li>networks</li>
 <li>security groups</li>
 </ul>
-<p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to GCP. Resources are only created
+<p>When you create one of the above resources, <strong>Cloudbreak does not make any requests to GCP. Resources are only created
 on GCP after the <code>create cluster</code> button has pushed.</strong> These templates are saved to Cloudbreak's database and can be
 reused with multiple clusters to describe the infrastructure.</p>
 <h4 id="templates">Templates</h4>
@@ -573,7 +573,7 @@ networks</strong> panel.</p>
 </ul>
 <blockquote>
 <p><strong>IMPORTANT:</strong> Please make sure the defined subnet here doesn't overlap with any of your already deployed subnet in the
- network, because of the validation only happens after the cluster creation starts.</p>
+ network, because the validation only happens after the cluster creation starts.</p>
 <p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
 provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
 </blockquote>
@@ -745,10 +745,10 @@ Documentation.</p>
 <p><code>Ambari Password</code> The password associated with the Ambari username. This password will be also the default password for all required passwords which are not specified in the blueprint. E.g: hive DB password.</p>
 <p><code>Availability Zone</code> You can restrict the instances to a <a href="https://cloud.google.com/compute/docs/zones">specific availability zone</a>. It may be useful if you're using
  reserved instances.</p>
-<p><code>Minimum cluster size</code> The provisioning strategy in case of the cloud provider cannot allocate all the requested nodes.</p>
+<p><code>Minimum cluster size</code> The provisioning strategy in case the cloud provider cannot allocate all the requested nodes.</p>
 <p><code>Validate blueprint</code> This is selected by default. Cloudbreak validates the Ambari blueprint in this case.</p>
 <p><code>Shipyard enabled cluster</code> This is selected by default. Cloudbreak will start a <a href="https://shipyard-project.com/">Shipyard</a> container which helps you to manage your containers.</p>
-<p><code>Config recommendation strategy</code> Strategy for configuration recommendations how will be applied. Recommended 
+<p><code>Config recommendation strategy</code> Strategy for how configuration recommendations will be applied. Recommended 
 configurations gathered by the response of the stack advisor. </p>
 <ul>
 <li><code>NEVER_APPLY</code>               Configuration recommendations are ignored with this option.</li>
@@ -762,7 +762,7 @@ configurations gathered by the response of the stack advisor. </p>
 GCP instances first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an 
 instance manually!</p>
 </blockquote>
-<p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
+<p>Sometimes Cloudbreak cannot synchronize its state with the cluster state at the cloud provider and the cluster can't
  be terminated. In this case the <code>Forced termination</code> option can help to terminate the cluster at the Cloudbreak 
  side. <strong>If it has happened:</strong></p>
 <ol>
@@ -813,7 +813,7 @@ example if your <code>cbd</code> working directory is <code>~/cloudbreak-deploym
 file...etc.</strong> to here. You can refer to these files with their names from the shell.</p>
 </blockquote>
 <h2 id="autocomplete-and-hints">Autocomplete and Hints</h2>
-<p>Cloudbreak Shell helps to you with <strong>hint messages</strong> from the very beginning, for example:</p>
+<p>Cloudbreak Shell helps you with <strong>hint messages</strong> from the very beginning, for example:</p>
 <pre><code>cloudbreak-shell&gt;hint
 Hint: Add a blueprint with the 'blueprint create' command or select an existing one with 'blueprint select'
 cloudbreak-shell&gt;
@@ -858,7 +858,7 @@ infrastructure:</p>
 <li>networks</li>
 <li>templates</li>
 </ul>
-<p>When you create one of the above resource, <strong>Cloudbreak does not make any requests to GCP. Resources are only created
+<p>When you create one of the above resources, <strong>Cloudbreak does not make any requests to GCP. Resources are only created
  on GCP after the <code>cluster create</code> has applied.</strong> These templates are saved to Cloudbreak's database and can be
  reused with multiple clusters to describe the infrastructure.</p>
 <h4 id="templates_1">Templates</h4>
@@ -902,7 +902,7 @@ to create clusters, but cannot delete it.</p>
 <p><code>--subnetId</code> if you have an existing subnet in the network then you can specify the id here and the cluster will use that existing subnet.</p>
 <blockquote>
 <p><strong>IMPORTANT:</strong> Make sure the defined subnet here doesn't overlap with any of your 
-already deployed subnet in the network, because of the validation only happens after the cluster creation starts.</p>
+already deployed subnet in the network, because the validation only happens after the cluster creation starts.</p>
 <p>In case of existing subnet make sure you have enough room within your network space for the new instances. The 
 provided subnet CIDR will be ignored, but a proper CIDR range will be used.</p>
 </blockquote>
@@ -1076,12 +1076,12 @@ stack stop
 <p><strong>IMPORTANT:</strong> Always use Cloudbreak to terminate the cluster. If that fails for some reason, try to delete the 
 CloudFormation stack first. Instances are started in an Auto Scaling Group so they may be restarted if you terminate an instance manually!</p>
 </blockquote>
-<p>Sometimes Cloudbreak cannot synchronize it's state with the cluster state at the cloud provider and the cluster can't
+<p>Sometimes Cloudbreak cannot synchronize its state with the cluster state at the cloud provider and the cluster can't
  be terminated. In this case the <code>Forced termination</code> option on the Cloudbreak Web UI can help to terminate the cluster
   at the Cloudbreak side. <strong>If it has happened:</strong></p>
 <ol>
 <li>You should check the related resources at the AWS CloudFormation</li>
-<li>If it is needed you need to manually remove resources from ther</li>
+<li>If it is needed you need to manually remove resources from there</li>
 </ol>
 <h2 id="silent-mode">Silent Mode</h2>
 <p>With Cloudbreak Shell you can execute script files as well. A script file contains shell commands and can 
@@ -1218,7 +1218,7 @@ provisioning, we have some <a href="../operations/">interesting insights</a> for
                $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
-               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
+               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbreak Deployer. Set the following environment variables for the OpenStack image import:</p>');
                $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 

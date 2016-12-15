@@ -546,12 +546,12 @@ When the blueprint is exported some configurations are hardcoded for example dom
 <p><strong>Advanced options</strong></p>
 <p>There are some advanced features when deploying a new cluster, these are the following:</p>
 <p><code>Validate blueprint</code> This is selected by default. Cloudbreak validates the Ambari blueprint in this case.</p>
-<p><code>Config recommendation strategy</code> Strategy for configuration recommendations how will be applied. Recommended 
+<p><code>Config recommendation strategy</code> Strategy for how configuration recommendations will be applied. Recommended 
 configurations gathered by the response of the stack advisor. </p>
 <ul>
 <li><code>NEVER_APPLY</code>               Configuration recommendations are ignored with this option.</li>
 <li><code>ONLY_STACK_DEFAULTS_APPLY</code> Applies only on the default configurations for all included services.</li>
-<li><code>ALWAYS_APPLY</code>              Applies on all configuration properties</li>
+<li><code>ALWAYS_APPLY</code>              Applies on all configuration properties.</li>
 </ul>
 <h2 id="cluster-termination">Cluster termination</h2>
 <p>You can terminate running or stopped clusters with the <code>terminate</code> button in the cluster details.</p>
@@ -657,7 +657,7 @@ configurations gathered by the response of the stack advisor. </p>
                $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
-               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
+               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbreak Deployer. Set the following environment variables for the OpenStack image import:</p>');
                $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 
