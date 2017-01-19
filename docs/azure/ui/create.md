@@ -73,6 +73,8 @@ There are some advanced features when deploying a new cluster, these are the fol
 
 `Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 
+`Custom Image` If you enable this, you can override the default image for provision.
+
 `Shipyard enabled cluster` This is selected by default. Cloudbreak will start a [Shipyard](https://shipyard-project.com/) container which helps you to manage your containers.
 
 `Persistent Storage Name` This is `cbstore` by default. Cloudbreak will copy the image into a storage which is not deleting under the termination. When you starting a new cluster then the provisioning will be much faster because of the existing image.

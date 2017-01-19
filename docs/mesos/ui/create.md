@@ -37,6 +37,8 @@ There are some advanced features when deploying a new cluster, these are the fol
 
 `Validate blueprint` This is selected by default. Cloudbreak validates the Ambari blueprint in this case.
 
+`Custom Image` If you enable this, you can override the default image for provision.
+
 `Config recommendation strategy` Strategy for how configuration recommendations will be applied. Recommended 
 configurations gathered by the response of the stack advisor. 
 
