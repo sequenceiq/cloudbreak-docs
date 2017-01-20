@@ -30,6 +30,7 @@ pages:
         - Ambari Database (TP): database.md
         - Platforms (TP): topologies.md
         - Kerberos (TP): kerberos.md
+        - LDAP/AD (TP): ldap.md
         - Mesos (TP): mesos.md
         - SPI: spi.md
         - Basic Operations : operations.md
