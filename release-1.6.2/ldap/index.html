@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/spi/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/ldap/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>SPI - Cloudbreak 1.6.2</title>
+	<title>LDAP/AD (TP) - Cloudbreak 1.6.2</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -195,8 +195,8 @@
 
                         
                             
-<li >
-    <a href="../ldap/">LDAP/AD (TP)</a>
+<li class="active">
+    <a href="./">LDAP/AD (TP)</a>
 </li>
 
                         
@@ -207,8 +207,8 @@
 
                         
                             
-<li class="active">
-    <a href="./">SPI</a>
+<li >
+    <a href="../spi/">SPI</a>
 </li>
 
                         
@@ -260,12 +260,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../mesos/">
+                        <a rel="next" href="../kerberos/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../operations/">
+                        <a rel="prev" href="../mesos/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -290,13 +290,9 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#service-provider-interface-spi">Service Provider Interface (SPI)</a></li>
+        <li class="main active"><a href="#ldapad-configuration">LDAP/AD configuration</a></li>
         
-            <li><a href="#resource-management">Resource Management</a></li>
-        
-            <li><a href="#variants">Variants</a></li>
-        
-            <li><a href="#development">Development</a></li>
+            <li><a href="#mapping-oauth2-scopes-to-ldap-groups">Mapping Oauth2 scopes to LDAP groups</a></li>
         
     
     </ul>
@@ -304,76 +300,79 @@
                 <div class="col-md-9" role="main">
                     
 
-<h1 id="service-provider-interface-spi">Service Provider Interface (SPI)</h1>
-<p>Cloudbreak already supports multiple cloud platforms and provides an easy way to integrate a new provider trough <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api">Cloudbreak's Service Provider Interface (SPI)</a>, a plugin mechanism that enables seamless integration of any cloud provider. The SPI plugin mechanism has been used to integrate all currently supported providers with Cloudbreak. Consequently, if you use SPI to integrate a new provider, the integration will be seamless.</p>
-<ul>
-<li>The <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-aws">cloud-aws</a> module integrates Amazon Web Services</li>
-<li>The <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-gcp">cloud-gcp</a> module integrates Google Cloud Platform</li>
-<li>The <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-arm">cloud-arm</a> module integrates Microsoft Azure</li>
-<li>The <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-openstack">cloud-openstack</a> module integrates OpenStack</li>
-</ul>
-<p>The SPI interface is event-based, it scales well, and is decoupled from Cloudbreak. The core of Cloudbreak uses <a href="http://projectreactor.io/">EventBus</a> to communicate with the providers, but the complexity of event handling is hidden from the provider implementation.</p>
-<h2 id="resource-management">Resource Management</h2>
-<p>Cloud providers support two kinds of deployment and resource management methods:</p>
-<ul>
-<li>Template-based deployments</li>
-<li>Individual resource-based deployments</li>
-</ul>
-<p>Cloudbreak's SPI supports both of these methods. It provides a well-defined interfaces, abstract classes, and helper classes, scheduling and polling of resources to aid the integration and to avoid any boilerplate code in the module of cloud provider.</p>
-<h3 id="template-based-deployments">Template Based Deployments</h3>
-<p>Providers with template-based deployments like <a href="https://aws.amazon.com/cloudformation/">AWS CloudFormation</a>, <a href="https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/#">Azure ARM</a> or <a href="https://wiki.openstack.org/wiki/Heat">OpenStack Heat</a> have the ability to create and manage a collection of related cloud resources, provisioning and updating them in an orderly and predictable fashion. </p>
-<p>In such scenario, Cloudbreak needs a reference to the template itself because every change in the infrastructure (for example, creating new instance or deleting one) is managed through this templating mechanism.</p>
-<p>If a provider has templating support, then the provider's <a href="http://gradle.org/">gradle</a> module depends on the <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-api">cloud-api</a> module:</p>
-<pre><code>apply plugin: 'java'
+<h1 id="ldapad-configuration">LDAP/AD configuration</h1>
+<p>There are cases where it might be useful to authenticate Cloudbreak users against an existing enterprise LDAP/AD server as it might already have all the users preconfigured. Cloudbreak supports this without the need to modify the existing LDAP schema.</p>
+<p>To setup LDAP/AD authentication for Cloudbreak, the <code>/var/lib/cloudbreak-deployment/uaa.yml</code> must be changed as it is described in <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md">Cloudfoundry's documentation</a>.</p>
+<p>Sample for LDAP authentication (the CN of the users in LDAP is the e-mail address in this case, as Cloudbreak uses an e-mail address as identifier):</p>
+<pre><code>spring_profiles: postgresql,ldap
 
-sourceCompatibility = 1.7
+ldap:
+  profile:
+    file: ldap/ldap-search-and-bind.xml
+  base:
+    url: 'ldap://10.0.3.138:389/'
+    userDn: 'CN=Administrator,CN=Users,DC=ad,DC=hortonworks,DC=com'
+    password: 'Admin123!'
+    searchBase: 'DC=ad,DC=hortonworks,DC=com'
+    searchFilter: 'cn={0}'
+  groups:
+    file: ldap/ldap-groups-map-to-scopes.xml
+    searchBase: ou=scopes,dc=ad,dc=hortonworks,dc=com
+    searchSubtree: true
+    groupSearchFilter: member={0}
+    maxSearchDepth: 10
+    autoAdd: true
 
-repositories {
-    mavenCentral()
-}
-
-jar {
-    baseName = 'cloud-new-provider'
-}
-
-dependencies {
-
-    compile project(':cloud-api')
-
-}
+... rest of the content of uaa.yml
 </code></pre>
 
-<p>The entry point for the provider is the  <a href="https://github.com/sequenceiq/cloudbreak/blob/master/cloud-api/src/main/java/com/sequenceiq/cloudbreak/cloud/CloudConnector.java">CloudConnector</a> interface and every interface that needs to be implemented is reachable trough this interface.</p>
-<h3 id="individual-resource-based-deployments">Individual Resource Based Deployments</h3>
-<p>There are providers such as GCP that do not support suitable templating mechanism, and customisable providers such as OpenStack where the Heat Orchestration (templating) component is optional and individual resources need to be handled separately. </p>
-<p>In such scenarios, resources such as networks, discs, and compute instances need to be created and managed with an ordered sequence of API calls, and Cloudbreak needs to provide a solution to manage the collection of related cloud resources as a whole.</p>
-<p>If the provider has no templating support, then the provider's <a href="http://gradle.org/">gradle</a> module typically depends on the <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-template">cloud-template</a> module, which includes Cloudbreak defined abstract template. This template is a set of abstract and utility classes to support provisioning and updating related resources in an orderly and predictable manner trough ordered sequences of cloud API calls:</p>
-<pre><code>apply plugin: 'java'
-
-sourceCompatibility = 1.7
-
-repositories {
-    mavenCentral()
-}
-
-jar {
-    baseName = 'cloud-new-provider'
-}
-
-dependencies {
-
-    compile project(':cloud-template')
-
-}
+<p>An ldapsearch query can be run to verify the Administrator's credentials and to be able to bind (sample):</p>
+<pre><code>ldapsearch -x -h 10.0.3.138 -D &quot;CN=Administrator,CN=Users,DC=ad,DC=hortonworks,DC=com&quot; -W -b &quot;uid=user,cn=Users,dc=ad,dc=hortonworks,dc=com&quot;
 </code></pre>
 
-<h2 id="variants">Variants</h2>
-<p>OpenStack is highly modular. It allows you to install different components, for example for volume storage or networking (Nova networking, Neutron, etc.). Or, in some scenarios, some components such as Heat may not installed at all.</p>
-<p>Cloudbreak's SPI interface reflects this flexibility using so called variants. This means that if some part of cloud provider (typically OpenStack) is using different component, you don't need re-implement the complete stack but just use a different variant and re-implement the part that is different.</p>
-<p>The reference implementation for this feature can be found in  <a href="https://github.com/sequenceiq/cloudbreak/tree/master/cloud-openstack">cloud-openstack</a> module which support a HEAT and NATIVE variants. The HEAT variant utilizes the Heat templating to launch a stack, but the NATIVE variant starts the cluster by using a sequence of API calls without Heat to achieve the same result, although both of them are using the same authentication and credential management.</p>
-<h2 id="development">Development</h2>
-<p>For instructions to set up your development environment, see <a href="https://github.com/sequenceiq/cloudbreak/blob/master/docs/dev/development.md">Local Development Setup</a>.</p>
-                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/spi.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+<p>If the user cannot bind, then it is possible to use password comparison method as well as described <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md#selecting-an-authentication-method">here</a>.</p>
+<p>Once the changes are made the following property must be set in the Profile file:</p>
+<pre><code>CBD_FORCE_START=true
+</code></pre>
+
+<p>This will ensure that the application will start with the modified uaa.yml. After that changes are made restart the application:</p>
+<pre><code>cbd kill
+cbd start
+</code></pre>
+
+<p><code>Note:</code> DO NOT use the <code>cbd restart</code> command as it regenerates all the yml files so the changes will be lost in uaa.yml.</p>
+<h2 id="mapping-oauth2-scopes-to-ldap-groups">Mapping Oauth2 scopes to LDAP groups</h2>
+<p>In order for the users to have access to Cloudbreak resources and to be able to create clusters the Oauth2 scopes must be mapped to LDAP groups. At the moment Cloudbreak only supports <code>one LDAP group per user</code> scenario.
+To see the Oauth2 scopes, execute the following command:</p>
+<pre><code>docker exec -it cbreak_uaadb_1 psql -U postgres -c 'select displayname from groups;'
+</code></pre>
+
+<p>To save them to a <code>groups.txt</code> file:</p>
+<pre><code>docker exec cbreak_uaadb_1 psql -U postgres -c 'select displayname from groups;' | tail -n +3 | grep -v rows | xargs -I@ echo @ &gt;&gt; groups.txt
+</code></pre>
+
+<p>To generate the SQL commands for the mapping we'll use <a href="https://github.com/gliderlabs/sigil">sigil</a>, which is a string interpolator and template processor. It is a single binary written in Golang and you can download it from the <a href="https://github.com/gliderlabs/sigil/releases">releases</a> page.
+Save the following in a file called: <code>template.sig</code> (cn=admin,ou=scopes,dc=ad,dc=hortonworks,dc=com depends on your LDAP group, it must be inside searchBase parameter configured in the first step in UAA.yml):</p>
+<pre><code>{{ range $k, $v := stdin|split &quot;\n&quot;}}
+ INSERT INTO external_group_mapping (group_id, external_group, added, origin) VALUES ((select id from groups where displayname='{{$v}}'), 'cn=admin,ou=scopes,dc=ad,dc=hortonworks,dc=com', '2016-09-30 19:28:24.255', 'ldap');{{end}}
+</code></pre>
+
+<p>then generate the SQL commands into <code>mapping.sql</code>:</p>
+<pre><code>cat groups.txt | sigil -f template.sig &gt; mapping.sql
+</code></pre>
+
+<p>and remove lines with empty displayname:</p>
+<pre><code>sed -i.bak &quot;/displayname=''/d&quot; mapping.sql
+</code></pre>
+
+<p>then execute the commands:</p>
+<pre><code>docker cp mapping.sql cbreak_uaadb_1:/tmp/mapping.sql
+docker exec cbreak_uaadb_1 psql -U postgres -f /tmp/mapping.sql
+</code></pre>
+
+<p>After the mapping is successfully done, you can log in with users authenticated against LDAP.
+If a user is a member of multiple LDAP groups, then an error message is presented during Cloudbreak login.  </p>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/ldap.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
         </div>
