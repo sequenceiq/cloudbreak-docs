@@ -2,14 +2,28 @@
 
 The Release Notes document describes new features and fixes incorporated in this version of Cloudbreak.
 
-## Fixes
+## Improvements
 
-This release includes the following fixes and improvements:
+This release includes the following improvements:
 
 | Feature | Description |
 |----|----|
-| Designate Ambari Server Host Group (RMP-7026) | When creating a cluster, you can designate which Host Group to include Ambari Server. |
-| Azure: New Regions (RMP-7028) | Support for Canada East and Canada Central. |
+| Designate Ambari Server Host Group (RMP-7026) | When creating a cluster, you can designate in which host group to include Ambari Server. |
+| Azure: Support for New Regions (RMP-7028) | Support for Canada East and Canada Central. |
+
+## Fixes & Changes
+
+This release include the following changes:
+> Refer to the [Change Log](changelog.md) for a full list of changes.
+
+| Area | Change |
+|---|---|
+| Azure Cloud Provider | Reduce host name length on Azure in order to be sure that the hostname is under 64 chars. |
+| Azure Cloud Provider | Azure VMs supporting private deployments (when VMs have private IP only.) |
+| Azure Cloud Provider | Do not use the same host names for every cluster on Azure. |
+| Azure Cloud Provider | Configurable stack name prefix length in Azure host names. |
+| Networking | Rename all open port security group to denote unsecure. |
+| Networking | Remove all port open security group as default. |
 
 ## Technical Preview
 
