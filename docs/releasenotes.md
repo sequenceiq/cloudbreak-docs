@@ -21,7 +21,7 @@ This release include the following changes:
 | Azure Cloud Provider | Reduce host name length on Azure in order to be sure that the hostname is under 64 chars. |
 | Azure Cloud Provider | Azure VMs now support private deployments (when VMs have private IP only).  |
 | Azure Cloud Provider | Cloudbreak no longer uses the same host names for every cluster on Azure.  |
-| Azure Cloud Provider | Introduces configurable stack name prefix length in Azure host names, allowing you to specify how many characters will be included as a prefix in the hostname. |
+| Azure Cloud Provider | Introduces configurable stack name prefix length in Azure host names: cluster name is generated into the hostname, allowing you to specify how many characters will be included as a prefix in the hostname. |
 | Networking | The "all-ports-open" security group was renamed to "UNSECURE-all-services-open" in order to make it more obvious that it is not recommended to use. |
 | Networking | The "all-ports-open" security group is not the default anymore. If you would like to make your cluster open, you must explicitly select the "UNSECURE-all-services-open" security group. |
 
