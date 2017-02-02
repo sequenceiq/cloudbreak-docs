@@ -196,6 +196,12 @@
                         
                             
 <li >
+    <a href="../ldap/">LDAP/AD (TP)</a>
+</li>
+
+                        
+                            
+<li >
     <a href="../mesos/">Mesos (TP)</a>
 </li>
 
@@ -663,45 +669,43 @@ This may change in a later release.</p>
 <li>SSH (22)</li>
 <li>HTTPS (443)</li>
 </ul>
-<p><code>all-services-port:</code> all Hadoop services, SSH and HTTPS are accessible by default:</p>
-<ul>
-<li>SSH (22)</li>
-<li>HTTPS (443)</li>
-<li>Ambari (8080)</li>
-<li>Consul (8500)</li>
-<li>NN (50070)</li>
-<li>RM Web (8088)</li>
-<li>Scheduler (8030RM)</li>
-<li>IPC (8050RM)</li>
-<li>Job history server (19888)</li>
-<li>HBase master (60000)</li>
-<li>HBase master web (60010)</li>
-<li>HBase RS (16020)</li>
-<li>HBase RS info (60030)</li>
-<li>Falcon (15000)</li>
-<li>Storm (8744)</li>
-<li>Hive metastore (9083)</li>
-<li>Hive server (10000)</li>
-<li>Hive server HTTP (10001)</li>
-<li>Accumulo master (9999)</li>
-<li>Accumulo Tserver (9997)</li>
-<li>Atlas (21000)</li>
-<li>KNOX (8443)</li>
-<li>Oozie (11000)</li>
-<li>Spark HS (18080)</li>
-<li>NM Web (8042)</li>
-<li>Zeppelin WebSocket (9996)</li>
-<li>Zeppelin UI (9995)</li>
-<li>Kibana (3080)</li>
-<li>Elasticsearch (9200)</li>
-</ul>
 <p><em>Custom Security Group</em></p>
 <p>You can define your own security group by adding all the ports, protocols and CIDR range you'd like to use. The rules
  defined here doesn't need to contain the internal rules, those are automatically added by Cloudbreak to the security group on AWS.</p>
+<p>Hadoop services :
+<em> Ambari (8080)
+</em> Consul (8500)
+<em> NN (50070)
+</em> RM Web (8088)
+<em> Scheduler (8030RM)
+</em> IPC (8050RM)
+<em> Job history server (19888)
+</em> HBase master (60000)
+<em> HBase master web (60010)
+</em> HBase RS (16020)
+<em> HBase RS info (60030)
+</em> Falcon (15000)
+<em> Storm (8744)
+</em> Hive metastore (9083)
+<em> Hive server (10000)
+</em> Hive server HTTP (10001)
+<em> Accumulo master (9999)
+</em> Accumulo Tserver (9997)
+<em> Atlas (21000)
+</em> KNOX (8443)
+<em> Oozie (11000)
+</em> Spark HS (18080)
+<em> NM Web (8042)
+</em> Zeppelin WebSocket (9996)
+<em> Zeppelin UI (9995)
+</em> Kibana (3080)
+* Elasticsearch (9200)</p>
 <blockquote>
 <p><strong>IMPORTANT</strong> 443 and 22 ports needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
 provisioned cluster</p>
 </blockquote>
+<p><em>Use existing security group</em></p>
+<p>Use this kind of security group if you have an existing security group and you'd like to apply same rules to each host group in a cluster.</p>
 <p>If <code>Public in account</code> is checked all the users belonging to your account will be able to use this security group 
 template to create clusters, but cannot delete it.</p>
 <blockquote>
@@ -797,6 +801,7 @@ the AWS Console CloudFormation page.
 <p><code>Use dedicated instances</code> You can use <a href="https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/">dedicated instances</a> on EC2</p>
 <p><code>Minimum cluster size</code> The provisioning strategy in case the cloud provider cannot allocate all the requested nodes.</p>
 <p><code>Validate blueprint</code> This is selected by default. Cloudbreak validates the Ambari blueprint in this case.</p>
+<p><code>Custom Image</code> If you enable this, you can override the default image for provision.</p>
 <p><code>Config recommendation strategy</code> Strategy for how configuration recommendations will be applied. Recommended 
 configurations gathered by the response of the stack advisor. </p>
 <ul>
