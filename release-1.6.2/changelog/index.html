@@ -292,6 +292,8 @@
     
         <li class="main active"><a href="#change-log">Change Log</a></li>
         
+            <li><a href="#v1140">[v1.14.0]</a></li>
+        
             <li><a href="#v162">[v1.6.2]</a></li>
         
             <li><a href="#v161">[v1.6.1]</a></li>
@@ -374,6 +376,10 @@
 
 <h1 id="change-log">Change Log</h1>
 <p>The Change Log summarizes the changes in Cloudbreak.</p>
+<h2 id="v1140">[v1.14.0]</h2>
+<ul>
+<li>ability to specify more rdsconfig on one cluster</li>
+</ul>
 <h2 id="v162">[v1.6.2]</h2>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -1123,7 +1129,7 @@
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak Deployer image to your local machine:</p>');
-               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
+               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
@@ -1135,7 +1141,7 @@
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak image to your local machine:</p>');
-               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
+               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbreak Deployer. Set the following environment variables for the OpenStack image import:</p>');
