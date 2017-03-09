@@ -16,7 +16,7 @@ export UAA_DEFAULT_USER_LASTNAME='[default admin last name]'
 ```
 Cloudbreak has more additional secrets which by default inherits value from `UAA_DEFAULT_SECRET`, but you should also define different one in the Profile for each of the service clients:
 ```
-export UAA_CLOUDBREAK_SECRET='[clousbreak secret]'
+export UAA_CLOUDBREAK_SECRET='[cloudbreak secret]'
 export UAA_PERISCOPE_SECRET='[auto scaling secret]'
 export UAA_ULUWATU_SECRET='[web ui secret]'
 export UAA_SULTANS_SECRET='[authenticator secret]'
