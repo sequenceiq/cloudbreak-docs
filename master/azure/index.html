@@ -552,45 +552,26 @@ App Owner Tenant ID: sdwerwe1-d98e-dsf12-dsf123-df123232
 </code></pre>
 
 <h2 id="file-system-configuration">File System Configuration</h2>
-<p>When starting a cluster with Cloudbreak on Azure, the default file system is “Windows Azure Blob Storage”. Hadoop has 
-built-in support for the <a href="https://hadoop.apache.org/docs/current/hadoop-azure/index.html">WASB file system</a> so it can be
-used easily as HDFS.</p>
-<h3 id="disks-and-blob-storage">Disks and Blob Storage</h3>
+<p>When starting a cluster with Cloudbreak on Azure, the default file system is “Local HDFS”.</p>
+<p>Cloudbreak has support for <a href="https://hadoop.apache.org/docs/r3.0.0-alpha2/hadoop-azure-datalake/index.html">Azure Data Lake Store (ADLS) file system</a>, selecting it from the drop-down list automatically configures the required properties in the cluster. ADLS is not supported as default file system.   </p>
+<p>Hadoop has built-in support for the <a href="https://hadoop.apache.org/docs/current/hadoop-azure/index.html">Windows Azure Blob Storage (WASB) file system</a>, so it can be
+used easily as default file system. To enable this behavior, <code>Use File System As Default</code> must be selected.</p>
+<h3 id="disks-and-storage">Disks and Storage</h3>
 <p>In Azure every data disk attached to a virtual machine <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-disks-vhds/">is stored</a> as a virtual hard disk (VHD) in a page blob inside an Azure storage account. Because these are not local disks and the operations must be done on the VHD files it causes degraded performance when used as HDFS.
 When WASB is used as a Hadoop file system the files are full-value blobs in a storage account. It means better performance compared to the data disks and the WASB file system can be configured very easily but Azure storage accounts have their own <a href="https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/#storage-limits">limitations</a> as well. There is a space limitation for TB per storage account (500 TB) as well but the real bottleneck is the total request rate that is only 20000 IOPS where Azure will start to throw errors when trying to do an I/O operation.
-To bypass those limits Microsoft created a small service called <a href="https://github.com/MicrosoftDX/Dash">DASH</a>. DASH itself is a service that imitates the API of the Azure Blob Storage API and it can be deployed as a Microsoft Azure Cloud Service. Because its API is the same as the standard blob storage API it can be used <em>almost</em> in the same way as the default WASB file system from a Hadoop deployment.
-DASH works by sharding the storage access across multiple storage accounts. It can be configured to distribute storage account load to at most 15 <strong>scaleout</strong> storage accounts. It needs one more <strong>namespace</strong> storage account where it keeps track of where the data is stored.
-When configuring a WASB file system with Hadoop, the only required config entries are the ones where the access details are described. To access a storage account Azure generates an access key that is displayed on the Azure portal or can be queried through the API while the account name is the name of the storage account itself. A DASH service has a similar account name and key, those can be configured in the configuration file while deploying the cloud service.</p>
-<p><img alt="" src="../diagrams/dash.png" /></p>
-<h3 id="deploying-a-dash-service-with-cloudbreak-deployer">Deploying a DASH Service with Cloudbreak Deployer</h3>
-<p>We automated the deployment of DASH service in Cloudbreak Deployer. After <code>cbd</code> is installed, simply run the 
-following command to deploy a DASH cloud service with 5 scale out storage accounts:</p>
-<pre><code>cbd azure deploy-dash --accounts 5 --prefix dash --location &quot;West Europe&quot; --instances 3
-</code></pre>
-
-<p>The command applies the following steps:</p>
-<ol>
-<li>It creates the namespace account and the scale out storage accounts</li>
-<li>It builds the <em>.cscfg</em> configuration file based on the created storage account names and keys</li>
-<li>It generates an Account Name and an Account Key for the DASH service</li>
-<li>Finally it deploys the cloud service package file to a new cloud service</li>
-</ol>
-<p>The WASB file system configured with DASH can be used as a data lake - when multiple clusters are deployed with the 
-same DASH file system configuration the same data can be accessed from all the clusters, but every cluster can have a 
-different service configured as well. In that case deploy as many DASH services with <code>cbd</code> as clusters with 
-Cloudbreak and configure them accordingly.</p>
+To bypass those limits Azure Data Lake Store (ADLS) can be used, which is an Apache Hadoop file system compatible with Hadoop Distributed File System (HDFS) and works with the Hadoop ecosystem. To be able to use it, an ADLS account must be created on your Azure subscription. For more information on ADLS, refer to <a href="https://azure.microsoft.com/en-us/documentation/articles/data-lake-store-overview/">Overview of Azure Data Lake Store</a>.</p>
 <h3 id="containers-within-the-storage-account">Containers Within the Storage Account</h3>
-<p>Cloudbreak creates a new container in the configured storage account for each cluster with the following name 
-pattern <code>cloudbreak-UNIQUE_ID</code>. Re-using existing containers in the same account is not supported as dirty data can 
-lead to failing cluster installations. In order to take advantage of the WASB file system your data does not have to 
+<p>Cloudbreak creates a new container in the configured storage account for each cluster with the following name
+pattern <code>cloudbreak-UNIQUE_ID</code>. Re-using existing containers in the same account is not supported as dirty data can
+lead to failing cluster installations. In order to take advantage of the WASB file system your data does not have to
 be in the same storage account nor in the same container. You can add as many accounts as you wish through Ambari, by
- setting the properties described <a href="https://hadoop.apache.org/docs/stable/hadoop-azure/index.html">here</a>. Once you 
+ setting the properties described <a href="https://hadoop.apache.org/docs/stable/hadoop-azure/index.html">here</a>. Once you
  added the appropriate properties you can use those storage accounts with the pre-existing data, like:</p>
 <pre><code>hadoop fs -ls wasb://data@youraccount.blob.core.windows.net/terasort-input/
 </code></pre>
 
 <blockquote>
-<p><strong>IMPORTANT:</strong> Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and 
+<p><strong>IMPORTANT:</strong> Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and
 you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
 </blockquote>
 <h2 id="generate-a-new-ssh-key">Generate a New SSH Key</h2>
@@ -859,13 +840,14 @@ be Kerberized. See more about it in the <a href="../kerberos/">Kerberos</a> sect
 <p><code>Add File System</code> tab</p>
 <ul>
 <li>Select one of the file system that fits your needs</li>
-<li>After you've selected <code>WASB</code> or <code>DASH</code>, you should configure:<ul>
+<li>If you've selected <code>WASB</code> you should configure:<ul>
 <li><code>Storage Account Name</code></li>
 <li><code>Storage Account Access Key</code></li>
 </ul>
 </li>
+<li>If you've selected <code>ADLS</code>, you should specify your preconfigured ADLS account name.    </li>
 <li>Click on the <code>Review and Launch</code> button<blockquote>
-<p><code>File system</code> is a mandatory configuration for Azure. You can read more about WASB and DASH in the <a href="./#file-system-configuration">File System Configuration section</a>.</p>
+<p><code>File system</code> is a mandatory configuration for Azure. You can read more about WASB and ADLS in the <a href="./#file-system-configuration">File System Configuration section</a>.</p>
 </blockquote>
 </li>
 </ul>
