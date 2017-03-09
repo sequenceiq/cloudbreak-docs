@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/update/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/security/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Update Cloudbreak - Cloudbreak 1.6.3</title>
+	<title>Cloudbreak Security - Cloudbreak 1.6.3</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -141,14 +141,14 @@
 
                         
                             
-<li >
-    <a href="../security/">Cloudbreak Security</a>
+<li class="active">
+    <a href="./">Cloudbreak Security</a>
 </li>
 
                         
                             
-<li class="active">
-    <a href="./">Update Cloudbreak</a>
+<li >
+    <a href="../update/">Update Cloudbreak</a>
 </li>
 
                         
@@ -266,12 +266,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../security/">
+                        <a rel="next" href="../shell/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../ui_account/">
+                        <a rel="prev" href="../update/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -296,10 +296,7 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#update-cloudbreak-deployer">Update Cloudbreak Deployer</a></li>
-        
-    
-        <li class="main "><a href="#update-existing-clusters">Update existing clusters</a></li>
+        <li class="main active"><a href="#cloudbreak-security">Cloudbreak Security</a></li>
         
     
     </ul>
@@ -307,56 +304,36 @@
                 <div class="col-md-9" role="main">
                     
 
-<h1 id="update-cloudbreak-deployer">Update Cloudbreak Deployer</h1>
-<p>To update Cloudbreak Deployer to the newest version, run the following commands on the console where your <code>Profile</code> is located:</p>
-<p><strong>Step 1:</strong> Stop all of the running Cloudbreak components:</p>
-<pre><code>cbd kill
+<h1 id="cloudbreak-security">Cloudbreak Security</h1>
+<p>Security is very important in general, but it is the most important in production environments. Cloudbreak comes with default settings, but those settings are aiming for easy first dating, not strict security. So first of all you can block all communication ports except 443 on the firewall / security group / whatever you use. It is strongly recommended to open SSH port (usually 22) if you have to log in to the Cloudbreak host remotely.</p>
+<p>The second step is to configure the Profile file before starting Cloudbreak for the first time. As a starting point, execute the following command in the directory where you want to store Cloudbreak related files:</p>
+<pre><code>echo export PUBLIC_IP=[the ip or hostname to bind] &gt; Profile
 </code></pre>
 
-<p><strong>Step 2:</strong> Update Cloudbreak Deployer:</p>
-<pre><code>cbd update
+<p>After you have a base Profile you should add custom properties to the Profile file:</p>
+<pre><code>export UAA_DEFAULT_SECRET='[custom secret]'
+export UAA_DEFAULT_USER_EMAIL='[default admin email address]'
+export UAA_DEFAULT_USER_PW='[default admin password]'
+export UAA_DEFAULT_USER_FIRSTNAME='[default admin first name]'
+export UAA_DEFAULT_USER_LASTNAME='[default admin last name]'
 </code></pre>
 
-<p><strong>Step 3:</strong> Update the <code>docker-compose.yml</code> file with new Docker containers needed for the <code>cbd</code>:</p>
-<pre><code>cbd regenerate
+<p>Cloudbreak has more additional secrets which by default inherits their values from <code>UAA_DEFAULT_SECRET</code>, but you should also define different ones in the Profile for each of the service clients:</p>
+<pre><code>export UAA_CLOUDBREAK_SECRET='[cloudbreak secret]'
+export UAA_PERISCOPE_SECRET='[auto scaling secret]'
+export UAA_ULUWATU_SECRET='[web ui secret]'
+export UAA_SULTANS_SECRET='[authenticator secret]'
 </code></pre>
 
-<p><strong>Step 4:</strong> If there are no other Cloudbreak instances that still use old Cloudbreak versions, remove the obsolete containers:</p>
-<pre><code>cbd util cleanup
+<p>You can change secrets any time except <code>UAA_CLOUDBREAK_SECRET</code>, because it is used to encrypt sensitive information at database level. Client secret changes are applied during startup so a restart is required after a change.</p>
+<p>As you see <code>UAA_DEFAULT_USER_PW</code> is stored in plain text format, but if <code>UAA_DEFAULT_USER_PW</code> is missing from the Profile, it gets a default value. Because default password is not an option if you set an empty password explicitly in the Profile, Cloudbreak deployer will ask for password all the time when it is needed for the operation.</p>
+<pre><code>export UAA_DEFAULT_USER_PW=''
 </code></pre>
 
-<p><strong>Step 5:</strong> Check the health and version of the updated <code>cbd</code>: </p>
-<pre><code>cbd doctor
+<p>In this case Cloudbreak deployer wouldn't be able to add the default user, so you have to do it manually by executing the following command:</p>
+<pre><code>cbd util add-default-user
 </code></pre>
-
-<p><strong>Step 6:</strong> Start the new version of the <code>cbd</code>:</p>
-<pre><code>cbd start
-</code></pre>
-
-<blockquote>
-<p>Cloudbreak needs to download updated docker images for the new version, so this step may take a while.</p>
-</blockquote>
-<h1 id="update-existing-clusters">Update existing clusters</h1>
-<p>Upgrading from version <code>1.4.0</code> to newer versions (<code>1.5.0</code> or <code>1.6.0</code>) doesn't require any manual modification from the users.</p>
-<p>If Cloudbreak has been updated from <code>1.3.0</code> to <code>1.4.0</code> version then existing clusters need to be updated to be still managable through Cloudbreak.
-To update existing clusters from <code>1.3.0</code> to <code>1.4.0</code> or newer versions, run the following commands on the <code>cbgateway</code> node of the cluster:</p>
-<ul>
-<li>Update the version of the Salt-Bootsrap tool on the nodes:</li>
-</ul>
-<pre><code>salt '*' cmd.run 'curl -Ls https://github.com/sequenceiq/salt-bootstrap/releases/download/v0.1.2/salt-bootstrap_0.1.2_Linux_x86_64.tgz | tar -zx -C /usr/sbin/ salt-bootstrap'
-</code></pre>
-
-<ul>
-<li>Trigger restart of tool on the nodes:</li>
-</ul>
-<pre><code>salt '*' service.dead salt-bootstrap
-</code></pre>
-
-<blockquote>
-<p><strong>NOTE</strong> Checking the version of the Salt-Bootsrap on the nodes:</p>
-<p><code>salt '*' cmd.run 'salt-bootstrap --version'</code></p>
-</blockquote>
-                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/update.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/security.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
         </div>
