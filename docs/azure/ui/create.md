@@ -40,11 +40,12 @@ be Kerberized. See more about it in the [Kerberos](kerberos.md) section of this 
 `Add File System` tab
 
  - Select one of the file system that fits your needs
- - After you've selected `WASB` or `DASH`, you should configure:
+ - If you've selected `WASB` you should configure:
     - `Storage Account Name`
     - `Storage Account Access Key`
+ - If you've selected `ADLS`, you should specify your preconfigured ADLS account name.    
  - Click on the `Review and Launch` button
->`File system` is a mandatory configuration for Azure. You can read more about WASB and DASH in the [File System Configuration section](azure.md#file-system-configuration).
+>`File system` is a mandatory configuration for Azure. You can read more about WASB and ADLS in the [File System Configuration section](azure.md#file-system-configuration).
 
 `Review and Launch` tab
 

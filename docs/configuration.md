@@ -61,7 +61,7 @@ export CLOUDBREAK_SMTP_STARTTLS_ENABLE=true
 export CLOUDBREAK_SMTP_TYPE=smtp
 ```
 
-#### SMTPS 
+#### SMTPS
 
 If your SMTP server uses SMTPS, you must set the protocol in your `Profile` to `smtps`:
 ```
@@ -70,7 +70,7 @@ export CLOUDBREAK_SMTP_TYPE=smtps
 
 ### Certificates
 
-#### Trusted Certificates 
+#### Trusted Certificates
 
 If the certificate used by the SMTP server is self-signed or the Java's default trust store doesn't contain it, you can add it to the trust store by copying it to `certs/trusted` inside the Cloudbreak Deployer directory, and start (or restart) the Cloudbreak container (with `cbd start`). On startup, the Cloudbreak container  automatically imports the certificates in that directory to its trust store.
 
@@ -95,7 +95,7 @@ As a best practice we recommend to replace `mydomain.com` with the actual domain
 
 ###Access from Custom Domains
 
-Cloudbreak Deployer supports multitenancy and uses UAA as an identity provider. In UAA, multitenancy is managed through identity zones. An identity zone is accessed through a unique subdomain. For example, if the standard UAA responds to [https://uaa.10.244.0.34.xip.io](https://uaa.10.244.0.34.xip.io), a zone on this UAA can be accessed through a unique subdomain [https://testzone1.uaa.10.244.0.34.xip.io](https://testzone1.uaa.10.244.0.34.xip.io). 
+Cloudbreak Deployer supports multitenancy and uses UAA as an identity provider. In UAA, multitenancy is managed through identity zones. An identity zone is accessed through a unique subdomain. For example, if the standard UAA responds to [https://uaa.10.244.0.34.xip.io](https://uaa.10.244.0.34.xip.io), a zone on this UAA can be accessed through a unique subdomain [https://testzone1.uaa.10.244.0.34.xip.io](https://testzone1.uaa.10.244.0.34.xip.io).
 
 If you want to use a custom domain for your identity or deployment, add the `UAA_ZONE_DOMAIN` line to your `Profile`:
 ```
@@ -107,7 +107,7 @@ For example, in our hosted deployment, the `identity.sequenceiq.com` domain refe
 
 ### Consul
 
-Cloudbreak uses [Consul](http://consul.io) for DNS resolution. All Cloudbreak-related services are registered as **someservice.service.consul**. 
+Cloudbreak uses [Consul](http://consul.io) for DNS resolution. All Cloudbreak-related services are registered as **someservice.service.consul**.
 
 Consul’s built-in DNS server is able to fall back on another DNS server.
 This option is called `-recursor`. Clodbreak Deployer first tries to discover the DNS settings of the host by looking for **nameserver** entry in the `/etc/resolv.conf` file. If it finds one, consul will use it as a recursor. Otherwise, it will use **8.8.8.8** .
@@ -129,7 +129,5 @@ export CB_GCP_HOSTKEY_VERIFY=true
 ### Azure Resource Manager Command
 
 - **cbd azure configure-arm**
-- **cbd azure deploy-dash**
 
 For more information, see Azure [documentation](/azure/#azure-application-setup-with-cloudbreak-deployer).
-
