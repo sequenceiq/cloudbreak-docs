@@ -27,5 +27,4 @@ Hadoop services :
 * Kibana (3080)
 * Elasticsearch (9200)
 
->**IMPORTANT** 443 and 22 ports needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the 
-provisioned cluster.
+>**IMPORTANT** 443, 9443, and 22 ports needs to be there in every security group otherwise Cloudbreak won't be able to communicate with the provisioned cluster.
