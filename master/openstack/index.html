@@ -310,6 +310,8 @@
         
             <li><a href="#set-up-cloudbreak-deployer">Set up Cloudbreak Deployer</a></li>
         
+            <li><a href="#initialize-your-profile">Initialize Your Profile</a></li>
+        
             <li><a href="#using-self-signed-certificates">Using Self-signed Certificates</a></li>
         
             <li><a href="#availability-zones-and-region-config">Availability Zones and Region config</a></li>
@@ -447,14 +449,13 @@ section here before starting the provisioning.</p>
 </code></pre>
 
 <p>This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.</p>
-<h3 id="initialize-your-profile">Initialize Your Profile</h3>
-<p>First, initialize <code>cbd</code>:</p>
-<pre><code>cbd init
+<h2 id="initialize-your-profile">Initialize Your Profile</h2>
+<p>First, initialize <code>cbd</code> by creating a <code>Profile</code> file with the following content:</p>
+<pre><code>export UAA_DEFAULT_SECRET='[SECRET]'
+export UAA_DEFAULT_USER_PW='[PASSWORD]'
 </code></pre>
 
-<p>This will create a <code>Profile</code> file in the current directory. Open the <code>Profile</code> file and check the <code>PUBLIC_IP</code>.
-The <code>PUBLIC_IP</code> is mandatory because it is used to access the Cloudbreak UI. In some cases the <code>cbd</code> tool tries to
-guess it. If <code>cbd</code> cannot get the IP address during the initialization, set the appropriate value.</p>
+<p>By default the <code>cbd</code> tool tries to guess <code>PUBLIC_IP</code> to bind Cloudbreak UI to it. But if <code>cbd</code> cannot get the IP address during the initialization, set the appropriate value also in your <code>Profile</code>.</p>
 <h3 id="openstack-specific-configuration">OpenStack-specific Configuration</h3>
 <p>Make sure that the <a href="./#cloudbreak-import">VM image used by Cloudbreak is imported on your OpenStack</a>.</p>
 <h2 id="using-self-signed-certificates">Using Self-signed Certificates</h2>
