@@ -80,16 +80,6 @@ Cloudbreak Deployer (`cbd`)
   cd /var/lib/cloudbreak-deployment
 ```
 
-- Check if the `Profile` has the public IP properly configured. It should contain a line like this:
-```
-  export PUBLIC_IP=<PUBLIC_IP_OF_VM>
-```
-> If you can't see the public IP of the VM in the Profile, add it manually and restart cbd with
-
-```
-  cbd restart
-```
-
 - Pre-installed Cloudbreak Deployer version and health:
 ```
   cbd doctor

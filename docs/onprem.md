@@ -101,12 +101,15 @@ Initialize `cbd` by using:
 ```
 mkdir cloudbreak-deployment
 cd cloudbreak-deployment
-cbd init
 ```
 
-This creates a `Profile` file in the current directory.   
+First, initialize `cbd` by creating a `Profile` file with the following content:
 
-Open the `Profile` file and check the `PUBLIC_IP`. Cloudbreak UI uses the `PUBLIC_IP` to access the Cloudbreak UI. In some cases, the `cbd` tool tries to guess it. If `cbd` did not get the IP address during the initialization, set the appropriate value.
+```
+export UAA_DEFAULT_SECRET='[SECRET]'
+export UAA_DEFAULT_USER_PW='[PASSWORD]'
+```
+By default the `cbd` tool tries to guess `PUBLIC_IP` to bind Cloudbreak UI to it. But if `cbd` cannot get the IP address during the initialization, set the appropriate value also in your `Profile`.
 
 
 #### Generate Your Profile

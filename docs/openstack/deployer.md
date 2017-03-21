@@ -21,16 +21,15 @@ cd /var/lib/cloudbreak-deployment/
 ```
 This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.
 
-### Initialize Your Profile
+## Initialize Your Profile
 
-First, initialize `cbd`:
+First, initialize `cbd` by creating a `Profile` file with the following content:
 
 ```
-cbd init
+export UAA_DEFAULT_SECRET='[SECRET]'
+export UAA_DEFAULT_USER_PW='[PASSWORD]'
 ```
-This will create a `Profile` file in the current directory. Open the `Profile` file and check the `PUBLIC_IP`.
-The `PUBLIC_IP` is mandatory because it is used to access the Cloudbreak UI. In some cases the `cbd` tool tries to
-guess it. If `cbd` cannot get the IP address during the initialization, set the appropriate value.
+By default the `cbd` tool tries to guess `PUBLIC_IP` to bind Cloudbreak UI to it. But if `cbd` cannot get the IP address during the initialization, set the appropriate value also in your `Profile`.
 
 ### OpenStack-specific Configuration
 
