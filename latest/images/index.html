@@ -9,7 +9,7 @@
         <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/images/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Cloud Images (TP) - Cloudbreak 1.6.2</title>
+	<title>Cloud Images - Cloudbreak 1.6.0</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -45,7 +45,7 @@
             <!-- Main title -->
             <img class="navbar-logo" src="../img/HWX-RGB-full-no-tagline_500pxh.png" alt="Hortonworks Documentation"
                  width="132" height="52">
-            <a class="navbar-brand" href="..">Cloudbreak 1.6.2</a>
+            <a class="navbar-brand" href="..">Cloudbreak 1.6.0</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -171,38 +171,32 @@
 
                         
                             
+<li >
+    <a href="../topologies/">Platforms</a>
+</li>
+
+                        
+                            
 <li class="active">
-    <a href="./">Cloud Images (TP)</a>
+    <a href="./">Cloud Images</a>
 </li>
 
                         
                             
 <li >
-    <a href="../database/">Ambari Database (TP)</a>
+    <a href="../kerberos/">Kerberos</a>
 </li>
 
                         
                             
 <li >
-    <a href="../topologies/">Platforms (TP)</a>
+    <a href="../database/">Ambari Database</a>
 </li>
 
                         
                             
 <li >
-    <a href="../kerberos/">Kerberos (TP)</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../ldap/">LDAP/AD (TP)</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../mesos/">Mesos (TP)</a>
+    <a href="../mesos/">Mesos</a>
 </li>
 
                         
@@ -260,12 +254,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../blueprints/">
+                        <a rel="next" href="../topologies/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../database/">
+                        <a rel="prev" href="../kerberos/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -307,9 +301,6 @@
                     
 
 <h1 id="custom-cloud-images">Custom Cloud Images</h1>
-<blockquote>
-<p>Custom Images support is part of <code>TECHNICAL PREVIEW</code>. It may not be suitable for production use.</p>
-</blockquote>
 <p>Every cloud platform comes with default images that contain packages required to build an Ambari and HDP stack. These default images are declared in yml files, which Cloudbreak loads upon start. You can customize these images and use them instead of the defaults. </p>
 <p>To overwrite the default yml files, place files declaring your custom images in the <code>/var/lib/cloudbreak-deployment/etc</code> directory. The etc directory does not exist by default so you need to create it.</p>
 <p>The format of the yml files is platform-specific and described in the following sections.  </p>
@@ -319,46 +310,48 @@
 <h2 id="aws">AWS</h2>
 <p>To override the default images, create the following file: <code>/var/lib/cloudbreak-deployment/etc/aws-images.yml</code> and replace its content by region as desired. The default content of the yml file is:</p>
 <pre><code>aws:
-  ap-northeast-1: ami-76729917
-  ap-northeast-2: ami-7c1ad112
-  ap-southeast-1: ami-a7ac7fc4
-  ap-southeast-2: ami-acf7decf
-  eu-central-1: ami-71da331e
-  eu-west-1: ami-cba43bb8
-  sa-east-1: ami-f8901a94
-  us-east-1: ami-bde327d0
-  us-west-1: ami-b76421d7
-  us-west-2: ami-d541bbb5
+  ap-northeast-1: ami-49ce6928
+  ap-northeast-2: ami-bbf521d5
+  ap-southeast-1: ami-959731f6
+  ap-southeast-2: ami-8d86b4ee
+  eu-central-1: ami-bcfd04d3
+  eu-west-1: ami-4b206f38
+  sa-east-1: ami-2971ec45
+  us-east-1: ami-8a0d5c9d
+  us-west-1: ami-62cc8402
+  us-west-2: ami-97bd18f7
 </code></pre>
 
 <h2 id="azure">Azure</h2>
 <p>To override the default images, create the following file: <code>/var/lib/cloudbreak-deployment/etc/arm-images.yml</code> and replace its content by region as desired. The default content of the yml file is:</p>
 <pre><code>azure_rm:
-  East Asia: https://sequenceiqeastasia2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  East US: https://sequenceiqeastus2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  Central US: https://sequenceiqcentralus2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  North Europe: https://sequenceiqnortheurope2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  South Central US: https://sequenceiqouthcentralus2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  North Central US: https://sequenceiqorthcentralus2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  East US 2: https://sequenceiqeastus22.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  Japan East: https://sequenceiqjapaneast2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  Japan West: https://sequenceiqjapanwest2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  Southeast Asia: https://sequenceiqsoutheastasia2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  West US: https://sequenceiqwestus2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  West Europe: https://sequenceiqwesteurope2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
-  Brazil South: https://sequenceiqbrazilsouth2.blob.core.windows.net/images/cb-2016-06-14-03-27.vhd
+  East Asia: https://sequenceiqeastasia2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  East US: https://sequenceiqeastus12.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  Central US: https://sequenceiqcentralus2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  North Europe: https://sequenceiqnortheurope2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  South Central US: https://sequenceiqouthcentralus2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  North Central US: https://sequenceiqorthcentralus2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  East US 2: https://sequenceiqeastus22.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  Japan East: https://sequenceiqjapaneast2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  Japan West: https://sequenceiqjapanwest2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  Southeast Asia: https://sequenceiqsoutheastasia2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  West US: https://sequenceiqwestus2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  West Europe: https://sequenceiqwesteurope2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  Brazil South: https://sequenceiqbrazilsouth2.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  Canada East: https://sequenceiqcanadaeast.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
+  Canada Central: https://sequenceiqcanadacentral.blob.core.windows.net/images/cb-2016-10-18-08-46.vhd
 </code></pre>
 
 <h2 id="gcp">GCP</h2>
 <p>To override the default images, create the following file: <code>/var/lib/cloudbreak-deployment/etc/gcp-images.yml</code> and replace its content as desired. It is not required to have an image in every region, as the <code>default</code> is used everywhere. The default content of the yml file is:</p>
 <pre><code>gcp:
-  default: sequenceiqimage/cb-2016-06-14-03-27.tar.gz
+  default: sequenceiqimage/cb-2016-10-18-08-46.tar.gz
 </code></pre>
 
 <h2 id="openstack">OpenStack</h2>
 <p>To override the default images, create the following file: <code>/var/lib/cloudbreak-deployment/etc/os-images.yml</code> and replace its content as desired. It is not required to have an image in every region, as the <code>default</code> is used everywhere. The default content of the yml file is:</p>
 <pre><code>openstack:
-  default: cloudbreak-2016-06-14-10-58
+  default: cloudbreak-2016-10-18-08-46
 </code></pre>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/images.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
@@ -444,7 +437,7 @@
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<br>');
                $("#cloudbreak-deployer-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak Deployer image to your local machine:</p>');
-               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
+               $("#cloudbreak-deployer-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<br>');
                $("#cloudbreak-deployer-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Set the following environment variables for the OpenStack image import:</p>');
@@ -456,10 +449,10 @@
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<br>');
                $("#cloudbreak-image").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">Download the latest Cloudbreak image to your local machine:</p>');
-               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
+               $("#cloudbreak-image").append('<pre><code style="font-size: 12pt;color:#333333">curl -O -k https://public-repo-1.hortonworks.com/HDP/cloudbreak/' + data.metadata.image_name + '.img</code></pre>');
                $("#cloudbreak-import").append('<br>');
                $("#cloudbreak-import").append('<br>');
-               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbreak Deployer. Set the following environment variables for the OpenStack image import:</p>');
+               $("#cloudbreak-import").append('<p style="font-size: 14px;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;line-height: 1.428571429;color: #555;">This is very similar to the Cloudbrek Deployer. Set the following environment variables for the OpenStack image import:</p>');
                $("#cloudbreak-import").append('<pre><code style="font-size: 12px;color:#333333">export CB_LATEST_IMAGE=</code>' + data.metadata.image_name + '.img</code></p>');
                });
 
