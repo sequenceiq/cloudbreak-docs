@@ -16,14 +16,14 @@ To add recipe via the web UI, in the **manage recipes** section, choose **create
 To add recipe via shell, use the following command:
 
 ```
-recipe create --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script
+recipe create --name [recipe-name] --type [PRE|POST] --scriptFile /path/of/the/recipe-script
 ```
 
 This command has optional parameters:
 
 `--description` "string" description of the recipe
 
-`--timeout` "integer" timeout of the script execution
+`--scriptUrl` "string" remote location of the recipe
 
 `--publicInAccount` "flag" flags if the recipe is public in the account
 
