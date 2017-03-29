@@ -305,7 +305,7 @@
         
             <li><a href="#azure-access-setup">Azure Access Setup</a></li>
         
-            <li><a href="#azure-application-setup-with-cloudbreak-deployer">Azure Application Setup with Cloudbreak Deployer</a></li>
+            <li><a href="#azure-application-setup-with-azure-cli">Azure Application Setup with Azure CLI</a></li>
         
             <li><a href="#file-system-configuration">File System Configuration</a></li>
         
@@ -315,6 +315,10 @@
         <li class="main "><a href="#provisioning-via-browser">Provisioning via Browser</a></li>
         
             <li><a href="#setting-up-azure-credentials">Setting up Azure Credentials</a></li>
+        
+            <li><a href="#interactive-login">Interactive login</a></li>
+        
+            <li><a href="#app-based">App based</a></li>
         
             <li><a href="#infrastructure-templates">Infrastructure Templates</a></li>
         
@@ -506,45 +510,35 @@ Cloudbreak:</p>
 </li>
 <li>You will see the new co-administrator a in the <code>ADMINISTRATORS</code> list</li>
 </ul>
-<h2 id="azure-application-setup-with-cloudbreak-deployer">Azure Application Setup with Cloudbreak Deployer</h2>
+<h2 id="azure-application-setup-with-azure-cli">Azure Application Setup with Azure CLI</h2>
 <p>In order for Cloudbreak to be able to launch clusters on Azure on your behalf you need to set up your <strong>Azure ARM 
-application</strong>. If you do not want to create your ARM application via the Azure Web UI, <strong>we automated the related Azure 
-configurations in the Cloudbreak Deployer</strong>.</p>
-<p>If you use our <a href="./#deploy-using-the-azure-portal">Azure Template for Cloudbreak Deployer</a>, you should:</p>
-<ul>
-<li>SSH to the Cloudbreak Deployer Virtual machine</li>
-<li><code>cbd</code> location is <code>/var/lib/cloudbreak-deployment</code></li>
-<li>all <code>cbd</code> actions must be executed from the <code>cbd</code> folder</li>
-</ul>
-<blockquote>
-<p>Most of the <code>cbd</code> commands require <code>root</code> permissions. <strong>So <code>sudo su</code> here would be worth for you.</strong></p>
-</blockquote>
-<p>You can setup your Azure Application with the following <code>cbd</code> command:</p>
+application</strong>. If you do not want to create your ARM application via the Azure Web UI, <strong>you can create it with Azure CLI</strong>.</p>
+<p>You can find Azure CLI install documentation on the following link:
+<a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli">Azure CLI</a></p>
+<p>First you have to login with the command below:</p>
+<p><code>az login</code></p>
+<p>Then you can setup your Azure Application with the following Azure CLI command:</p>
+<pre><code>az ad sp create-for-rbac --name cloudbreak-app --password &quot;****&quot; --role Owner
+</code></pre>
+
+<p>Response:</p>
+<pre><code>{
+  &quot;appId&quot;: &quot;********-748c-4018-b445-************&quot;,
+  &quot;displayName&quot;: &quot;cloudbreak-app&quot;,
+  &quot;name&quot;: &quot;http://cloudbreak-app&quot;,
+  &quot;password&quot;: &quot;****&quot;,
+  &quot;tenant&quot;: &quot;********-d98e-4c64-9301-************&quot;
+}
+</code></pre>
+
 <blockquote>
 <p>Why you need this? Read more <a href="https://azure.microsoft.com/en-us/documentation/articles/role-based-access-control-configure/">here</a></p>
 </blockquote>
-<pre><code>cbd azure configure-arm --app_name myapp --app_password password123 --subscription_id 1234-abcd-efgh-1234
-</code></pre>
-
-<p>Other available options:</p>
-<p><code>--app_name</code> your new application name, <em>app</em> by default</p>
-<p><code>--app_password</code> your application password, <em>password</em> by default</p>
-<p><code>--subscription_id</code> your Azure subscription ID</p>
-<p><code>--username</code> your Azure username</p>
-<p><code>--password</code> your Azure password</p>
-<p>The command applies the following steps:</p>
 <ol>
 <li>It creates an Active Directory application with the configured name, password</li>
 <li>It grants permissions to call the Azure Resource Manager API</li>
 </ol>
-<p><strong>Please use the output of the command when you creating your Azure credential in Cloudbreak.</strong> The major part of 
-the output should be like this example:</p>
-<pre><code>Subscription ID: sdf324-26b3-sdf234-ad10-234dfsdfsd
-App ID: 234sdf-c469-sdf234-9062-dsf324
-Password: password123
-App Owner Tenant ID: sdwerwe1-d98e-dsf12-dsf123-df123232
-</code></pre>
-
+<p><strong>Please use the output of the command when you creating your Azure credential in Cloudbreak.</strong></p>
 <h2 id="file-system-configuration">File System Configuration</h2>
 <p>When starting a cluster with Cloudbreak on Azure, the default file system is “Local HDFS”.</p>
 <p>Cloudbreak has support for <a href="https://hadoop.apache.org/docs/r3.0.0-alpha2/hadoop-azure-datalake/index.html">Azure Data Lake Store (ADLS) file system</a>, selecting it from the drop-down list automatically configures the required properties in the cluster. ADLS is not supported as default file system.   </p>
@@ -613,7 +607,53 @@ Cloudbreak Dashboard.</p>
 can find the steps how can get the mandatory <code>Subscription ID</code>, <code>App ID</code>, <code>Password</code> and <code>App Owner Tenant ID</code> for 
 your Cloudbreak credential.</p>
 </blockquote>
-<p>To create a new AZURE credential follow these steps:</p>
+<p>To create a new AZURE credential you have two options:</p>
+<ul>
+<li>Interactive login</li>
+<li>App based</li>
+</ul>
+<h2 id="interactive-login">Interactive login</h2>
+<p><strong>Before you can use interactive login, you have to provide your tenant ID and subscription ID in your Profile</strong></p>
+<ul>
+<li>
+<p><code>export AZURE_TENANT_ID=********-d98e-4c64-9301-**************</code></p>
+</li>
+<li>
+<p><code>export AZURE_SUBSCRIPTION_ID=********-8a1d-4ac9-909b-************</code></p>
+</li>
+</ul>
+<h4 id="steps">Steps</h4>
+<ol>
+<li>
+<p>Fill out the new credential <code>Name</code></p>
+<ul>
+<li>Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied</li>
+</ul>
+</li>
+<li>
+<p>Copy your SSH public key to the <code>SSH public key</code> field</p>
+<ul>
+<li>The SSH public key must be in OpenSSH format and it's private keypair can be used later to <a href="../operations/#ssh-to-the-hosts">SSH onto every instance</a> of every cluster you'll create with this credential.</li>
+<li>The <strong>SSH username</strong> for the AZURE instances is <strong>cloudbreak</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Click next. Then you will see a device code on the screen. Click on the 'Azure login' button and please enter the code on the azure portal. </p>
+<p><img alt="" src="../azure/images/azure-device-code.png" title="Azure device code" /></p>
+</li>
+<li>
+<p>Select the account you wish to use </p>
+<ul>
+<li>This account must be in the same subscription and tenant what you previously provided in your Profile otherwise the credential creation will fail. </li>
+</ul>
+<p><img alt="" src="../azure/images/azure-select-account.png" title="Select account" /> </p>
+</li>
+<li>
+<p>After that you should see a progress bar like on the image below </p>
+<p><img alt="" src="../azure/images/azure-interactive-3.png" /></p>
+</li>
+</ol>
+<h2 id="app-based">App based</h2>
 <ul>
 <li>Fill out the new credential <code>Name</code><ul>
 <li>Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied</li>
