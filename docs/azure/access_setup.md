@@ -34,50 +34,38 @@ Cloudbreak:
     * Click on the tick button in the bottom of the the ADD A CO-ADMINISTRATOR window
  - You will see the new co-administrator a in the `ADMINISTRATORS` list
 
-## Azure Application Setup with Cloudbreak Deployer
+## Azure Application Setup with Azure CLI
 
 In order for Cloudbreak to be able to launch clusters on Azure on your behalf you need to set up your **Azure ARM 
-application**. If you do not want to create your ARM application via the Azure Web UI, **we automated the related Azure 
-configurations in the Cloudbreak Deployer**.
+application**. If you do not want to create your ARM application via the Azure Web UI, **you can create it with Azure CLI**.
 
-If you use our [Azure Template for Cloudbreak Deployer](azure.md#deploy-using-the-azure-portal), you should:
+You can find Azure CLI install documentation on the following link:
+[Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 
-  * SSH to the Cloudbreak Deployer Virtual machine
-  * `cbd` location is `/var/lib/cloudbreak-deployment`
-  * all `cbd` actions must be executed from the `cbd` folder
+First you have to login with the command below:
 
-> Most of the `cbd` commands require `root` permissions. **So `sudo su` here would be worth for you.**
+```az login```
 
-You can setup your Azure Application with the following `cbd` command:
+Then you can setup your Azure Application with the following Azure CLI command:
+
+```
+az ad sp create-for-rbac --name cloudbreak-app --password "****" --role Owner
+```
+
+Response:
+```
+{
+  "appId": "********-748c-4018-b445-************",
+  "displayName": "cloudbreak-app",
+  "name": "http://cloudbreak-app",
+  "password": "****",
+  "tenant": "********-d98e-4c64-9301-************"
+}
+```
 
 >  Why you need this? Read more [here](https://azure.microsoft.com/en-us/documentation/articles/role-based-access-control-configure/)
-
-```
-cbd azure configure-arm --app_name myapp --app_password password123 --subscription_id 1234-abcd-efgh-1234
-```
-Other available options:
-
-`--app_name` your new application name, *app* by default
-
-`--app_password` your application password, *password* by default
-
-`--subscription_id` your Azure subscription ID
-
-`--username` your Azure username
-
-`--password` your Azure password
-
-The command applies the following steps:
 
 1. It creates an Active Directory application with the configured name, password
 2. It grants permissions to call the Azure Resource Manager API
 
-**Please use the output of the command when you creating your Azure credential in Cloudbreak.** The major part of 
-the output should be like this example:
-
-```
-Subscription ID: sdf324-26b3-sdf234-ad10-234dfsdfsd
-App ID: 234sdf-c469-sdf234-9062-dsf324
-Password: password123
-App Owner Tenant ID: sdwerwe1-d98e-dsf12-dsf123-df123232
-```
+**Please use the output of the command when you creating your Azure credential in Cloudbreak.**
