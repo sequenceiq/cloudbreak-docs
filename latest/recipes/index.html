@@ -319,12 +319,12 @@
 <h2 id="adding-recipes">Adding Recipes</h2>
 <p>To add recipe via the web UI, in the <strong>manage recipes</strong> section, choose <strong>create new recipe</strong>. Next, select either SCRIPT or FILE type plugin and fill in required fields.</p>
 <p>To add recipe via shell, use the following command:</p>
-<pre><code>recipe create --name [recipe-name] --preInstallScriptFile /path/of/the/pre-install-script --postInstallScriptFile /path/of/the/post-install-script
+<pre><code>recipe create --name [recipe-name] --type [PRE|POST] --scriptFile /path/of/the/recipe-script
 </code></pre>
 
 <p>This command has optional parameters:</p>
 <p><code>--description</code> "string" description of the recipe</p>
-<p><code>--timeout</code> "integer" timeout of the script execution</p>
+<p><code>--scriptUrl</code> "string" remote location of the recipe</p>
 <p><code>--publicInAccount</code> "flag" flags if the recipe is public in the account</p>
 <h2 id="sample-recipe-for-yum-proxy-setting">Sample Recipe for Yum Proxy Setting</h2>
 <p>We've created a sample recipe that can be used to set proxy for yum:</p>
