@@ -76,6 +76,8 @@ There are some advanced features when deploying a new cluster, these are the fol
 
 `Custom Image` If you enable this, you can override the default image for provision.
 
+`Enable Availability sets` You can set up availability set support if enabled.
+
 `Shipyard enabled cluster` This is selected by default. Cloudbreak will start a [Shipyard](https://shipyard-project.com/) container which helps you to manage your containers.
 
 `Persistent Storage Name` This is `cbstore` by default. Cloudbreak will copy the image into a storage which is not deleting under the termination. When you starting a new cluster then the provisioning will be much faster because of the existing image.

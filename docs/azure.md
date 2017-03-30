@@ -24,6 +24,8 @@
 
 {!docs/azure/ui/securitygroup.md!}
 
+{!docs/azure/ui/availabilityset.md!}
+
 {!docs/blueprint/short_blueprint.md!}
 
 {!docs/azure/ui/create.md!}
