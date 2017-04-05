@@ -117,3 +117,5 @@ removed, Cloudbreak has to be able to access the YARN Resource Manager. When cre
 * In order to keep a healthy HDFS during downscale, Cloudbreak always keeps the `replication factor` configured and makes sure that there is enough `space` on HDFS to rebalance data.
 * During downscale, in order to minimize the rebalancing, replication, and HDFS storms, Cloudbreak checks block locations 
 and computes the least costly operations.
+
+The [API documentation](https://app.swaggerhub.com/api/Cloudbreak/Periscope/1.14.0) was generated from the code using [Swagger](http://swagger.io/).
