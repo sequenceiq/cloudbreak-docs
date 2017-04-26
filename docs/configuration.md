@@ -45,6 +45,26 @@ To permanently use the  `prod` profile, set `export CBD_DEFAULT_PROFILE=prod` in
 
 ## Available Configurations
 
+### Using Your Own SSL Certificate
+
+By default Cloudbreak is available only via HTTPS and it generates its own self-signed certificate. For most use cases such as testing or staging instances this is secure enough. However, if you want to use your own trusted certificate, you must manually configure it on the Cloudbreak host by replacing the existing certificate with your own certificate.
+
+#### Prerequisites
+
+ *  Resolvable domain name for the Cloudbreak hosts' IP addresses
+ *  Generated valid certificate for the domain
+
+#### Steps
+
+ 1.  First copy your private key and certificate to the host
+ 2.  Log in to the host machine via ssh, usually `ssh cloudbreak@[IP-ADDRESS]`
+ 3.  Make sure the domain name is resolvable for the host: `host [HOST-NAME]`
+ 4.  Change the host name of the machine using steps specific for your operating system
+ 5.  Identify your Cloudbreak location, which usually is `/var/lib/cloudbreak-deployer` and navigate there
+ 6.  Edit your `Profile` by adding or replacing `PUBLIC_IP` with `export PUBLIC_IP=[HOST-NAME]` where `[HOST-NAME]` is your actual Cloudbreak host
+ 7.  Configure TLS details in your `Profile` by adding the following line `export CBD_TRAEFIK_TLS="[CERT-LOCATION],[PRIV-KEY-LOCATION]"`
+ 8.  Restart Cloudbreak using the `cbd restart` command
+
 ### SMTP
 
 If you want to change SMTP parameters, add them your `Profile`.  
