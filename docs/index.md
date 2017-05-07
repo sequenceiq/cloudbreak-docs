@@ -57,7 +57,7 @@ For more information on Cloudbreak, Ambari and Ambari blueprints, see:
 
 | Resource | Description |
 |---|---|
-|[Cloudbreak Project](http://hortonworks.com/hadoop/cloudbreak/) | Visit the Hortonworks website to see Cloudbreak-related news and updates. |
-|[Cloudbreak Forums](http://hortonworks.com/hadoop/cloudbreak/#forums) | Visit the Cloudbreak Forums to get connected with the Cloudbreak community. |
+|[Cloudbreak Project](http://hortonworks.com/open-source/cloudbreak/) | Visit the Hortonworks website to see Cloudbreak-related news and updates. |
+|[Cloudbreak Forums](http://hortonworks.com/open-source/cloudbreak/#forums) | Visit the Cloudbreak Forums to get connected with the Cloudbreak community. |
 |[Apache Ambari Project](http://hortonworks.com/hadoop/ambari/) | Learn about the Apache Ambari Project. Apache Ambari is an operational platform for provisioning, managing, and monitoring Apache Hadoop clusters. Ambari exposes a robust set of REST APIs and a rich web interface for cluster management. |
 |[Ambari Blueprints](https://cwiki.apache.org/confluence/display/AMBARI/Blueprints)| Learn about Ambari Bleuprints. Ambari Blueprints are a declarative definition of a Hadoop cluster that Ambari can use to create Hadoop clusters. |
