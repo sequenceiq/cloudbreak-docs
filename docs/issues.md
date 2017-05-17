@@ -7,19 +7,23 @@
 ## Cloudbreak Shell
 
 * [EAR-5997](https://hortonworks.jira.com/browse/EAR-5997) NullPointerException will be thrown from CloudbreakShell during execution of ```stack create``` command if the template creation commands are executed after credential selection.<br>
-    Example:
-    ```
-    credential select --name my-aws-credential
-    ...
-    template create --AWS --name my-aws-template --description aws-template --instanceType m3.large --volumeType ephemeral --volumeCount 1 --volumeSize 32 --topologyId 1 --encrypted false
-    ...
-    stack create --AWS --name my-aws-cluster --region eu-west-1
-    ```
-    Workaround: template creation commands should be executed before the credential selection command
-    ```
-    template create --AWS --name my-aws-template --description aws-template --instanceType m3.large --volumeType ephemeral --volumeCount 1 --volumeSize 32 --topologyId 1 --encrypted false
-    ...
-    credential select --name my-aws-credential
-    ...
-    stack create --AWS --name my-aws-cluster --region eu-west-1
-    ```
+
+Example:
+
+```
+credential select --name my-aws-credential
+...
+template create --AWS --name my-aws-template --description aws-template --instanceType m3.large --volumeType ephemeral --volumeCount 1 --volumeSize 32 --topologyId 1 --encrypted false
+...
+stack create --AWS --name my-aws-cluster --region eu-west-1
+```
+
+Workaround: template creation commands should be executed before the credential selection command
+
+```
+template create --AWS --name my-aws-template --description aws-template --instanceType m3.large --volumeType ephemeral --volumeCount 1 --volumeSize 32 --topologyId 1 --encrypted false
+...
+credential select --name my-aws-credential
+...
+stack create --AWS --name my-aws-cluster --region eu-west-1
+```
