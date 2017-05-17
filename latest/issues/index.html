@@ -300,6 +300,8 @@
         
             <li><a href="#decommission">Decommission</a></li>
         
+            <li><a href="#cloudbreak-shell">Cloudbreak Shell</a></li>
+        
     
     </ul>
 </div></div>
@@ -310,6 +312,22 @@
 <h2 id="decommission">Decommission</h2>
 <ul>
 <li><a href="https://issues.apache.org/jira/browse/AMBARI-15294">AMBARI-15294</a> In case of downscaling if the selected host group contains an HBase RegionServer it's not guaranteed that all regions will be safely moved to another RegionServer which will remain as part of the cluster. If you choose to scale down such a host group Cloudbreak won't track the region movement process. It is recommended to put the RegionServers in a different host group in your blueprint than the ones you'll be scaling.</li>
+</ul>
+<h2 id="cloudbreak-shell">Cloudbreak Shell</h2>
+<ul>
+<li><a href="https://hortonworks.jira.com/browse/EAR-5997">EAR-5997</a> NullPointerException will be thrown from CloudbreakShell during execution of <code>stack create</code> command if the template creation commands are executed after credential selection.<br>
+    Example:
+    <code>credential select --name my-aws-credential
+    ...
+    template create --AWS --name my-aws-template --description aws-template --instanceType m3.large --volumeType ephemeral --volumeCount 1 --volumeSize 32 --topologyId 1 --encrypted false
+    ...
+    stack create --AWS --name my-aws-cluster --region eu-west-1</code>
+    Workaround: template creation commands should be executed before the credential selection command
+    <code>template create --AWS --name my-aws-template --description aws-template --instanceType m3.large --volumeType ephemeral --volumeCount 1 --volumeSize 32 --topologyId 1 --encrypted false
+    ...
+    credential select --name my-aws-credential
+    ...
+    stack create --AWS --name my-aws-cluster --region eu-west-1</code></li>
 </ul>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/issues.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
