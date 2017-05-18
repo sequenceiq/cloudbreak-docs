@@ -22,7 +22,7 @@ This directory contains configuration files and the supporting binaries for Clou
 
 ## Initialize Your Profile
 
-First, initialize `cbd` by creating a `Profile` file with the following content:
+First, initialize `cbd init` by creating a `Profile` file with the following content:
 
 ```
 export UAA_DEFAULT_SECRET='[SECRET]'
