@@ -613,6 +613,7 @@ your Cloudbreak credential.</p>
 <li>App based</li>
 </ul>
 <h2 id="interactive-login">Interactive login</h2>
+<p>Interactive login based credential creation is fully automated, meaning that the creation of the necessary Azure resources (application and service principal) is done automatically driven by Cloudbreak application itself, the user has to provide only a minimal set of input. </p>
 <p><strong>Before you can use interactive login, you have to provide your tenant ID and subscription ID in your Profile</strong></p>
 <ul>
 <li>
@@ -638,6 +639,33 @@ your Cloudbreak credential.</p>
 </ul>
 </li>
 <li>
+<p>Select Azure role type. You have the option to decide if Cloudbreak should use the built-in <code>Contributor</code> Azure role or a custom existing or new role for managing cluster resources in Azure. 
+    You have the following options:</p>
+<ul>
+<li><code>Use existing "Contributor" role</code><ul>
+<li>This is the default behaviour which needs no further input and will assign Cloudbreak service principal <code>Contributor</code> role for your subscription</li>
+</ul>
+</li>
+<li><code>Reuse existing custom role</code><ul>
+<li>You can reuse an already existing Azure role which has the required minimal permission set necessary for Cloudbreak to be able the manage the cluster's resources. It returns an error if no role with the name specified exists or the role does not have the required permission set. </li>
+</ul>
+</li>
+<li><code>Let Cloudbreak create a custom role</code><ul>
+<li>Choosing this option will let Cloudbreak application create the Azure role with the necessary permissions. It returns an error if a role alerady exists with the name specified.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>The necessary Action set for Cloudbreak to be able to manage the clusters include:
+                    "Microsoft.Compute/*",
+                    "Microsoft.Network/*",
+                    "Microsoft.Storage/*",
+                    "Microsoft.Resources/*"</p>
+</blockquote>
+<ol>
+<li>
 <p>Click next. Then you will see a device code on the screen. Click on the 'Azure login' button and please enter the code on the azure portal. </p>
 <p><img alt="" src="../azure/images/azure-device-code.png" title="Azure device code" /></p>
 </li>
@@ -654,6 +682,7 @@ your Cloudbreak credential.</p>
 </li>
 </ol>
 <h2 id="app-based">App based</h2>
+<p>You have to complete the <a href="./#azure-application-setup-with-cloudbreak-deployer">Provisioning prerequisites</a> where you can find the steps how can get the mandatory <code>Subscription ID</code>, <code>App ID</code>, <code>Password</code> and <code>App Owner Tenant ID</code> for your Cloudbreak credential.</p>
 <ul>
 <li>Fill out the new credential <code>Name</code><ul>
 <li>Only alphanumeric and lowercase characters (min 5, max 100 characters) can be applied</li>
