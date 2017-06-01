@@ -27,3 +27,7 @@ hadoop fs -ls wasb://data@youraccount.blob.core.windows.net/terasort-input/
 
 > **IMPORTANT:** Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and
 you have sufficient qouta (CPU, network, etc) for the requested cluster size.
+
+### Examples
+
+You can find additional examples for accessing resources in your storage accounts with Hadoop FileSystem Shell for **WASB** [here](https://hadoop.apache.org/docs/stable/hadoop-azure/index.html#Accessing_wasb_URLs) and for **ADLS** [here](https://hadoop.apache.org/docs/current/hadoop-azure-datalake/index.html#Accessing_adl_URLs).

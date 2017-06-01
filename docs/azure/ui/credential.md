@@ -38,6 +38,7 @@ Interactive login based credential creation is fully automated, meaning that the
         * This is the default behaviour which needs no further input and will assign Cloudbreak service principal `Contributor` role for your subscription
     * `Reuse existing custom role`
         * You can reuse an already existing Azure role which has the required minimal permission set necessary for Cloudbreak to be able the manage the cluster's resources. It returns an error if no role with the name specified exists or the role does not have the required permission set. 
+        > You can find documentation about creating custom roles [here](https://docs.microsoft.com/en-us/azure/active-directory/role-based-access-control-custom-roles).
     * `Let Cloudbreak create a custom role`
         * Choosing this option will let Cloudbreak application create the Azure role with the necessary permissions. It returns an error if a role alerady exists with the name specified.
 
