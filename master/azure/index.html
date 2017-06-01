@@ -562,6 +562,8 @@ be in the same storage account nor in the same container. You can add as many ac
 <p><strong>IMPORTANT:</strong> Make sure that your cloud account can launch instances using the new Azure ARM (a.k.a. V2) API and
 you have sufficient qouta (CPU, network, etc) for the requested cluster size.</p>
 </blockquote>
+<h3 id="examples">Examples</h3>
+<p>You can find additional examples for accessing resources in your storage accounts with Hadoop FileSystem Shell for <strong>WASB</strong> <a href="https://hadoop.apache.org/docs/stable/hadoop-azure/index.html#Accessing_wasb_URLs">here</a> and for <strong>ADLS</strong> <a href="https://hadoop.apache.org/docs/current/hadoop-azure-datalake/index.html#Accessing_adl_URLs">here</a>.</p>
 <h2 id="generate-a-new-ssh-key">Generate a New SSH Key</h2>
 <p>All the instances created by Cloudbreak are configured to allow key-based SSH,
 so you'll need to provide an SSH public key that can be used later to SSH onto the instances in the clusters you'll create with Cloudbreak.
@@ -647,7 +649,10 @@ your Cloudbreak credential.</p>
 </ul>
 </li>
 <li><code>Reuse existing custom role</code><ul>
-<li>You can reuse an already existing Azure role which has the required minimal permission set necessary for Cloudbreak to be able the manage the cluster's resources. It returns an error if no role with the name specified exists or the role does not have the required permission set. </li>
+<li>You can reuse an already existing Azure role which has the required minimal permission set necessary for Cloudbreak to be able the manage the cluster's resources. It returns an error if no role with the name specified exists or the role does not have the required permission set. <blockquote>
+<p>You can find documentation about creating custom roles <a href="https://docs.microsoft.com/en-us/azure/active-directory/role-based-access-control-custom-roles">here</a>.</p>
+</blockquote>
+</li>
 </ul>
 </li>
 <li><code>Let Cloudbreak create a custom role</code><ul>
