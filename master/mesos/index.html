@@ -400,13 +400,13 @@
 
 <p>This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.</p>
 <h4 id="initialize-your-profile">Initialize your Profile</h4>
-<p>First initialize <code>cbd</code>:  </p>
-<pre><code>cbd init
+<p>First, initialize deployer by creating a <code>Profile</code> file with the following content:</p>
+<pre><code>export UAA_DEFAULT_SECRET='[SECRET]'
+export UAA_DEFAULT_USER_PW='[PASSWORD]'
+export PUBLIC_IP='[PUBLIC_IP]'
 </code></pre>
 
-<p>This creates a <code>Profile</code> file in the current directory. Open the <code>Profile</code> file and check the <code>PUBLIC_IP</code>. 
-The <code>PUBLIC_IP</code> is mandatory, because it is used to access the Cloudbreak UI. In some cases the <code>cbd</code> tool tries to 
-guess it. If <code>cbd</code> cannot get the IP address during the initialization, set the appropriate value.</p>
+<p>The <code>PUBLIC_IP</code> is mandatory, because it is used to access the Cloudbreak UI.</p>
 <h4 id="start-cloudbreak-deployer">Start Cloudbreak Deployer</h4>
 <p>To start the Cloudbreak application use the following command:  </p>
 <pre><code>cbd start
