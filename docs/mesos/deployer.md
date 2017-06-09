@@ -20,13 +20,15 @@ This directory contains configuration files and the supporting binaries for Clou
 
 #### Initialize your Profile
 
-First initialize `cbd`:  
+First, initialize deployer by creating a `Profile` file with the following content:
+
 ```
-cbd init
+export UAA_DEFAULT_SECRET='[SECRET]'
+export UAA_DEFAULT_USER_PW='[PASSWORD]'
+export PUBLIC_IP='[PUBLIC_IP]'
 ```
-This creates a `Profile` file in the current directory. Open the `Profile` file and check the `PUBLIC_IP`. 
-The `PUBLIC_IP` is mandatory, because it is used to access the Cloudbreak UI. In some cases the `cbd` tool tries to 
-guess it. If `cbd` cannot get the IP address during the initialization, set the appropriate value.
+
+The `PUBLIC_IP` is mandatory, because it is used to access the Cloudbreak UI.
 
 #### Start Cloudbreak Deployer
 

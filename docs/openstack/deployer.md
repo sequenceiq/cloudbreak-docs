@@ -23,13 +23,15 @@ This directory contains configuration files and the supporting binaries for Clou
 
 ## Initialize Your Profile
 
-First, initialize `cbd init` by creating a `Profile` file with the following content:
+First, initialize deployer by creating a `Profile` file with the following content:
 
 ```
 export UAA_DEFAULT_SECRET='[SECRET]'
 export UAA_DEFAULT_USER_PW='[PASSWORD]'
+export PUBLIC_IP='[PUBLIC_IP]'
 ```
-By default the `cbd` tool tries to guess `PUBLIC_IP` to bind Cloudbreak UI to it. But if `cbd` cannot get the IP address during the initialization, set the appropriate value also in your `Profile`.
+
+The `PUBLIC_IP` is mandatory, because it is used to access the Cloudbreak UI.
 
 ### OpenStack-specific Configuration
 
