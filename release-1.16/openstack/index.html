@@ -450,13 +450,12 @@ section here before starting the provisioning.</p>
 
 <p>This directory contains configuration files and the supporting binaries for Cloudbreak Deployer.</p>
 <h2 id="initialize-your-profile">Initialize Your Profile</h2>
-<p>First, initialize deployer by creating a <code>Profile</code> file with the following content:</p>
+<p>First, initialize <code>cbd init</code> by creating a <code>Profile</code> file with the following content:</p>
 <pre><code>export UAA_DEFAULT_SECRET='[SECRET]'
 export UAA_DEFAULT_USER_PW='[PASSWORD]'
-export PUBLIC_IP='[PUBLIC_IP]'
 </code></pre>
 
-<p>The <code>PUBLIC_IP</code> is mandatory, because it is used to access the Cloudbreak UI.</p>
+<p>By default the <code>cbd</code> tool tries to guess <code>PUBLIC_IP</code> to bind Cloudbreak UI to it. But if <code>cbd</code> cannot get the IP address during the initialization, set the appropriate value also in your <code>Profile</code>.</p>
 <h3 id="openstack-specific-configuration">OpenStack-specific Configuration</h3>
 <p>Make sure that the <a href="./#cloudbreak-import">VM image used by Cloudbreak is imported on your OpenStack</a>.</p>
 <h2 id="using-self-signed-certificates">Using Self-signed Certificates</h2>
