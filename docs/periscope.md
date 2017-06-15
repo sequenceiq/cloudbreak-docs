@@ -118,4 +118,4 @@ removed, Cloudbreak has to be able to access the YARN Resource Manager. When cre
 * During downscale, in order to minimize the rebalancing, replication, and HDFS storms, Cloudbreak checks block locations 
 and computes the least costly operations.
 
-The [API documentation](https://app.swaggerhub.com/api/Cloudbreak/Periscope/1.14.0) was generated from the code using [Swagger](http://swagger.io/).
+The [API documentation](https://app.swaggerhub.com/api/Cloudbreak/Periscope/1.16.1) was generated from the code using [Swagger](http://swagger.io/).
