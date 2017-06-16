@@ -152,7 +152,7 @@
         }, 
         {
             "location": "/releasenotes/", 
-            "text": "Release Notes\n\n\nThe Release Notes document describes new features and fixes incorporated in this version of Cloudbreak.\n\n\nImprovements\n\n\nThis release includes the following improvements:\n\n\n\n\n\n\n\n\nFeature\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nHDP and Ambari\n\n\nUpdate to HDP 2.6 and Ambari 2.5.\n\n\n\n\n\n\nAzure Support for Private IPs\n\n\nSupport for using Azure Private IPs.\n\n\n\n\n\n\n\n\nFixes \n Changes\n\n\nThis release include the following changes:\n\n\n\n\nRefer to the \nChange Log\n for a full list of changes.\n\n\n\n\n\n\n\n\n\n\nArea\n\n\nChange\n\n\n\n\n\n\n\n\n\n\nAzure Cloud Provider\n\n\nDeallocate VMs instead of just stopping the instances.\n\n\n\n\n\n\n\n\nTechnical Preview\n\n\nThis release includes the following Technical Preview features and improvements:\n\n\n\n\n\n\n\n\nFeature\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nCustom Images\n\n\nTechnical Preview\n Ability to set custom images. See \nCloud Images\n for more information.\n\n\n\n\n\n\nAWS: Spot Pricing\n\n\nTechnical Preview\n Support for configuring Spot Price with resource templates.\n\n\n\n\n\n\nMesos\n\n\nTechnical Preview\n Support for Mesos cloud provider. See \nMesos\n for more information.\n\n\n\n\n\n\nKerberos\n\n\nTechnical Preview\n Support for enabling Kerberos on the HDP clusters deployed by Cloudbreak. See \nKerberos\n for more information.\n\n\n\n\n\n\nPlatforms\n\n\nTechnical Preview\n Support for defining Platforms to relate different configurations together. See \nPlatforms\n for more information.\n\n\n\n\n\n\nAmbari Database\n\n\nTechnical Preview\n Support for using an external database for Ambari. See \nAmbari Database\n for more information.", 
+            "text": "Release Notes\n\n\nThe Release Notes document describes new features and fixes incorporated in this version of Cloudbreak.\n\n\nNew Features\n\n\nThis release includes the following features:\n\n\n\n\n\n\n\n\nFeature\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nFlex Subscription\n\n\nIntroduces support for enabling a Hortonworks Flex Support Subscription for Cloudbreak clusters and the Cloudbreak node. For information on how to enable Flex Subscription in Cloudbreak, refer to \nFlex Subscription\n. If you are looking for general information about Flex Support Subscriptions, visit the Hortonworks Support page at \nhttps://hortonworks.com/services/support/enterprise/\n.\n\n\n\n\n\n\n\n\nFixes \n Changes\n\n\nThis release include the following changes:\n\n\n\n\nRefer to the \nChange Log\n for a full list of changes.\n\n\n\n\nTechnical Preview\n\n\nThis release includes the following Technical Preview features and improvements:\n\n\n\n\n\n\n\n\nFeature\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nCustom Images\n\n\nTechnical Preview\n Ability to set custom images. See \nCloud Images\n for more information.\n\n\n\n\n\n\nAWS: Spot Pricing\n\n\nTechnical Preview\n Support for configuring Spot Price with resource templates.\n\n\n\n\n\n\nMesos\n\n\nTechnical Preview\n Support for Mesos cloud provider. See \nMesos\n for more information.\n\n\n\n\n\n\nKerberos\n\n\nTechnical Preview\n Support for enabling Kerberos on the HDP clusters deployed by Cloudbreak. See \nKerberos\n for more information.\n\n\n\n\n\n\nPlatforms\n\n\nTechnical Preview\n Support for defining Platforms to relate different configurations together. See \nPlatforms\n for more information.\n\n\n\n\n\n\nAmbari Database\n\n\nTechnical Preview\n Support for using an external database for Ambari. See \nAmbari Database\n for more information.", 
             "title": "Release Notes"
         }, 
         {
@@ -161,13 +161,13 @@
             "title": "Release Notes"
         }, 
         {
-            "location": "/releasenotes/#improvements", 
-            "text": "This release includes the following improvements:     Feature  Description      HDP and Ambari  Update to HDP 2.6 and Ambari 2.5.    Azure Support for Private IPs  Support for using Azure Private IPs.", 
-            "title": "Improvements"
+            "location": "/releasenotes/#new-features", 
+            "text": "This release includes the following features:     Feature  Description      Flex Subscription  Introduces support for enabling a Hortonworks Flex Support Subscription for Cloudbreak clusters and the Cloudbreak node. For information on how to enable Flex Subscription in Cloudbreak, refer to  Flex Subscription . If you are looking for general information about Flex Support Subscriptions, visit the Hortonworks Support page at  https://hortonworks.com/services/support/enterprise/ .", 
+            "title": "New Features"
         }, 
         {
             "location": "/releasenotes/#fixes-changes", 
-            "text": "This release include the following changes:   Refer to the  Change Log  for a full list of changes.      Area  Change      Azure Cloud Provider  Deallocate VMs instead of just stopping the instances.", 
+            "text": "This release include the following changes:   Refer to the  Change Log  for a full list of changes.", 
             "title": "Fixes &amp; Changes"
         }, 
         {
@@ -2569,6 +2569,41 @@
             "location": "/flow/", 
             "text": "svg {\n        border: 1px solid #999;\n        overflow: hidden;\n    }\n    .node {\n        white-space: nowrap;\n    }\n    .node rect,\n    .node circle,\n    .node ellipse {\n        stroke: #333;\n        fill: #fff;\n        stroke-width: 1.5px;\n    }\n    .cluster rect {\n        stroke: #333;\n        fill: #000;\n        fill-opacity: 0.1;\n        stroke-width: 1.5px;\n    }\n    .edgePath path.path {\n        stroke: #333;\n        stroke-width: 1.5px;\n        fill: none;\n    }\n\n\n\n\n\n    \nFlows\n\n    \n\n        Cloudbreak has an asynchron mechanism to manage clusters in the background. Each operation like \nstack creation\n is encapsulated into a flow, and triggered if neccessary.", 
             "title": "Flows"
+        }, 
+        {
+            "location": "/help/", 
+            "text": "Get Help\n\n\nOptions for Getting Help\n\n\nIf you need help with Cloudbreak, you have two options:\n\n\n\n\n\n\n\n\nOption\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nHortonworks Community Connection\n\n\nThis is free optional support via Hortonworks Community Connection.\n\n\n\n\n\n\nHortonworks Flex Support Subscription\n\n\nThis is paid Hortonworks enterprise support.\n\n\n\n\n\n\n\n\nHCC\n\n\nYou can optionally register for optional free community support at \nHortonworks Community Connection\n where you can browse articles and previously answered questions, and ask questions of your own. When posting questions related to Cloudbreak, make sure to use the \"Cloudbreak\" tag.\n\n\nFlex Subscription\n\n\nYou can optionally use your existing Hortonworks \nFlex Subscriptions\n to cover the Cloudbreak node and all clusters created. To do that you must:\n\n\n\n\nConfigure SmartSenseID and Telemetry in your \nProfile\n file.   \n\n\nRegister your Flex Subscription in the Cloudreak web UI.\n\n\n\n\nOnce you've performed these steps, your flex subscription can be used for the Cloudbreak node and all newly created clusters. You can register multiple subscriptions and manage them in the cloud controller UI.\n\n\nFor general information about the Hortonworks Flex Support Subscription, visit the Hortonworks Support page at \nhttps://hortonworks.com/services/support/enterprise/\n.\n\n\nConfiguring Flex\n\n\n\n\n\n\nTo configure flex in Cloudbreak, enable SmartSense in the Profile by adding the following variables:\n\n\nexport CB_SMARTSENSE_ID=YOUR-SMARTSENSE-ID\n\nexport CB_SMARTSENSE_CONFIGURE=true\n\n\nFor example:\n\n\nexport CB_SMARTSENSE_ID=A-00000000-C-00000000\n\nexport CB_SMARTSENSE_CONFIGURE=true\n\n\n\n\n\n\nYou can do this in one of the two ways:\n\n\n\n\nWhen initiating Cloudbreak  \n\n\nAfter you've already initiated Cloudbreak Deployer. In this case, you must restart Cloudbreak using \ncbd restart\n.\n\n\n\n\nManaging Flex Subscriptions\n\n\nOnce you log in to the Cloudbreak web UI, you can manage your flex subscriptions from the manage flex subscriptions tab. From this tab, you can:\n\n\n\n\nRegister a new flex subscription.  \n\n\nSet a default flex subscription.  \n\n\nSelect a flex subscription to be used for cloud controller.  \n\n\nDelete a flex subscription.  \n\n\nCheck which clusters are connected to a specific subscription.  \n\n\n\n\nWhen creating a cluster using the advanced options, in the \nCONFIGURE CLUSTER\n \n \nFlex Subscriptions\n, you can select the flex subscription that you want to use.\n\n\nEquivalent options are also available via Cloudbreak Shell.", 
+            "title": "Get Help"
+        }, 
+        {
+            "location": "/help/#get-help", 
+            "text": "", 
+            "title": "Get Help"
+        }, 
+        {
+            "location": "/help/#options-for-getting-help", 
+            "text": "If you need help with Cloudbreak, you have two options:     Option  Description      Hortonworks Community Connection  This is free optional support via Hortonworks Community Connection.    Hortonworks Flex Support Subscription  This is paid Hortonworks enterprise support.", 
+            "title": "Options for Getting Help"
+        }, 
+        {
+            "location": "/help/#hcc", 
+            "text": "You can optionally register for optional free community support at  Hortonworks Community Connection  where you can browse articles and previously answered questions, and ask questions of your own. When posting questions related to Cloudbreak, make sure to use the \"Cloudbreak\" tag.", 
+            "title": "HCC"
+        }, 
+        {
+            "location": "/help/#flex-subscription", 
+            "text": "You can optionally use your existing Hortonworks  Flex Subscriptions  to cover the Cloudbreak node and all clusters created. To do that you must:   Configure SmartSenseID and Telemetry in your  Profile  file.     Register your Flex Subscription in the Cloudreak web UI.   Once you've performed these steps, your flex subscription can be used for the Cloudbreak node and all newly created clusters. You can register multiple subscriptions and manage them in the cloud controller UI.  For general information about the Hortonworks Flex Support Subscription, visit the Hortonworks Support page at  https://hortonworks.com/services/support/enterprise/ .", 
+            "title": "Flex Subscription"
+        }, 
+        {
+            "location": "/help/#configuring-flex", 
+            "text": "To configure flex in Cloudbreak, enable SmartSense in the Profile by adding the following variables:  export CB_SMARTSENSE_ID=YOUR-SMARTSENSE-ID \nexport CB_SMARTSENSE_CONFIGURE=true  For example:  export CB_SMARTSENSE_ID=A-00000000-C-00000000 \nexport CB_SMARTSENSE_CONFIGURE=true    You can do this in one of the two ways:   When initiating Cloudbreak    After you've already initiated Cloudbreak Deployer. In this case, you must restart Cloudbreak using  cbd restart .", 
+            "title": "Configuring Flex"
+        }, 
+        {
+            "location": "/help/#managing-flex-subscriptions", 
+            "text": "Once you log in to the Cloudbreak web UI, you can manage your flex subscriptions from the manage flex subscriptions tab. From this tab, you can:   Register a new flex subscription.    Set a default flex subscription.    Select a flex subscription to be used for cloud controller.    Delete a flex subscription.    Check which clusters are connected to a specific subscription.     When creating a cluster using the advanced options, in the  CONFIGURE CLUSTER     Flex Subscriptions , you can select the flex subscription that you want to use.  Equivalent options are also available via Cloudbreak Shell.", 
+            "title": "Managing Flex Subscriptions"
         }
     ]
 }

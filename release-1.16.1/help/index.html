@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/security/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/help/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Cloudbreak Security - Cloudbreak 1.16.1</title>
+	<title>Get Help - Cloudbreak 1.16.1</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -141,8 +141,8 @@
 
                         
                             
-<li class="active">
-    <a href="./">Cloudbreak Security</a>
+<li >
+    <a href="../security/">Cloudbreak Security</a>
 </li>
 
                         
@@ -246,8 +246,8 @@
 
                         
                             
-<li >
-    <a href="../help/">Get Help</a>
+<li class="active">
+    <a href="./">Get Help</a>
 </li>
 
                         
@@ -272,12 +272,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../shell/">
+                        <a rel="next" href="../flow/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
-                    <li >
-                        <a rel="prev" href="../update/">
+                    <li class="disabled">
+                        <a rel="prev" >
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -302,7 +302,13 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#cloudbreak-security">Cloudbreak Security</a></li>
+        <li class="main active"><a href="#get-help">Get Help</a></li>
+        
+            <li><a href="#options-for-getting-help">Options for Getting Help</a></li>
+        
+            <li><a href="#hcc">HCC</a></li>
+        
+            <li><a href="#flex-subscription">Flex Subscription</a></li>
         
     
     </ul>
@@ -310,36 +316,65 @@
                 <div class="col-md-9" role="main">
                     
 
-<h1 id="cloudbreak-security">Cloudbreak Security</h1>
-<p>Security is very important in general, but it is the most important in production environments. Cloudbreak comes with default settings, but those settings are aiming for easy first dating, not strict security. So first of all you can block all communication ports except 443 on the firewall / security group / whatever you use. It is strongly recommended to open SSH port (usually 22) if you have to log in to the Cloudbreak host remotely.</p>
-<p>The second step is to configure the Profile file before starting Cloudbreak for the first time. As a starting point, execute the following command in the directory where you want to store Cloudbreak related files:</p>
-<pre><code>echo export PUBLIC_IP=[the ip or hostname to bind] &gt; Profile
-</code></pre>
-
-<p>After you have a base Profile you should add custom properties to the Profile file:</p>
-<pre><code>export UAA_DEFAULT_SECRET='[custom secret]'
-export UAA_DEFAULT_USER_EMAIL='[default admin email address]'
-export UAA_DEFAULT_USER_PW='[default admin password]'
-export UAA_DEFAULT_USER_FIRSTNAME='[default admin first name]'
-export UAA_DEFAULT_USER_LASTNAME='[default admin last name]'
-</code></pre>
-
-<p>Cloudbreak has more additional secrets which by default inherits their values from <code>UAA_DEFAULT_SECRET</code>, but you should also define different ones in the Profile for each of the service clients:</p>
-<pre><code>export UAA_CLOUDBREAK_SECRET='[cloudbreak secret]'
-export UAA_PERISCOPE_SECRET='[auto scaling secret]'
-export UAA_ULUWATU_SECRET='[web ui secret]'
-export UAA_SULTANS_SECRET='[authenticator secret]'
-</code></pre>
-
-<p>You can change secrets any time except <code>UAA_CLOUDBREAK_SECRET</code>, because it is used to encrypt sensitive information at database level. Client secret changes are applied during startup so a restart is required after a change.</p>
-<p>As you see <code>UAA_DEFAULT_USER_PW</code> is stored in plain text format, but if <code>UAA_DEFAULT_USER_PW</code> is missing from the Profile, it gets a default value. Because default password is not an option if you set an empty password explicitly in the Profile, Cloudbreak deployer will ask for password all the time when it is needed for the operation.</p>
-<pre><code>export UAA_DEFAULT_USER_PW=''
-</code></pre>
-
-<p>In this case Cloudbreak deployer wouldn't be able to add the default user, so you have to do it manually by executing the following command:</p>
-<pre><code>cbd util add-default-user
-</code></pre>
-                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/security.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
+<h1 id="get-help">Get Help</h1>
+<h2 id="options-for-getting-help">Options for Getting Help</h2>
+<p>If you need help with Cloudbreak, you have two options:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hortonworks Community Connection</td>
+<td>This is free optional support via Hortonworks Community Connection.</td>
+</tr>
+<tr>
+<td>Hortonworks Flex Support Subscription</td>
+<td>This is paid Hortonworks enterprise support.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hcc">HCC</h2>
+<p>You can optionally register for optional free community support at <a href="https://community.hortonworks.com/answers/index.html">Hortonworks Community Connection</a> where you can browse articles and previously answered questions, and ask questions of your own. When posting questions related to Cloudbreak, make sure to use the "Cloudbreak" tag.</p>
+<h2 id="flex-subscription">Flex Subscription</h2>
+<p>You can optionally use your existing Hortonworks <a href="https://hortonworks.com/services/support/enterprise/">Flex Subscriptions</a> to cover the Cloudbreak node and all clusters created. To do that you must:</p>
+<ol>
+<li>Configure SmartSenseID and Telemetry in your <code>Profile</code> file.   </li>
+<li>Register your Flex Subscription in the Cloudreak web UI.</li>
+</ol>
+<p>Once you've performed these steps, your flex subscription can be used for the Cloudbreak node and all newly created clusters. You can register multiple subscriptions and manage them in the cloud controller UI.</p>
+<p>For general information about the Hortonworks Flex Support Subscription, visit the Hortonworks Support page at <a href="https://hortonworks.com/services/support/enterprise/">https://hortonworks.com/services/support/enterprise/</a>.</p>
+<h3 id="configuring-flex">Configuring Flex</h3>
+<ol>
+<li>
+<p>To configure flex in Cloudbreak, enable SmartSense in the Profile by adding the following variables:</p>
+<p><pre>export CB_SMARTSENSE_ID=YOUR-SMARTSENSE-ID<br />
+export CB_SMARTSENSE_CONFIGURE=true</pre></p>
+<p>For example:</p>
+<p><pre>export CB_SMARTSENSE_ID=A-00000000-C-00000000<br />
+export CB_SMARTSENSE_CONFIGURE=true</pre></p>
+</li>
+</ol>
+<p>You can do this in one of the two ways:</p>
+<ul>
+<li>When initiating Cloudbreak  </li>
+<li>After you've already initiated Cloudbreak Deployer. In this case, you must restart Cloudbreak using <code>cbd restart</code>.</li>
+</ul>
+<h3 id="managing-flex-subscriptions">Managing Flex Subscriptions</h3>
+<p>Once you log in to the Cloudbreak web UI, you can manage your flex subscriptions from the manage flex subscriptions tab. From this tab, you can:</p>
+<ul>
+<li>Register a new flex subscription.  </li>
+<li>Set a default flex subscription.  </li>
+<li>Select a flex subscription to be used for cloud controller.  </li>
+<li>Delete a flex subscription.  </li>
+<li>Check which clusters are connected to a specific subscription.  </li>
+</ul>
+<p>When creating a cluster using the advanced options, in the <strong>CONFIGURE CLUSTER</strong> &gt; <strong>Flex Subscriptions</strong>, you can select the flex subscription that you want to use.</p>
+<p>Equivalent options are also available via Cloudbreak Shell. </p>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/help.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
         </div>
