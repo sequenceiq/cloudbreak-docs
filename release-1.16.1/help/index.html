@@ -329,7 +329,7 @@
 <tbody>
 <tr>
 <td>Hortonworks Community Connection</td>
-<td>This is free optional support via Hortonworks Community Connection.</td>
+<td>This is free optional support via Hortonworks Community Connection (HCC).</td>
 </tr>
 <tr>
 <td>Hortonworks Flex Support Subscription</td>
@@ -340,40 +340,99 @@
 <h2 id="hcc">HCC</h2>
 <p>You can optionally register for optional free community support at <a href="https://community.hortonworks.com/answers/index.html">Hortonworks Community Connection</a> where you can browse articles and previously answered questions, and ask questions of your own. When posting questions related to Cloudbreak, make sure to use the "Cloudbreak" tag.</p>
 <h2 id="flex-subscription">Flex Subscription</h2>
-<p>You can optionally use your existing Hortonworks <a href="https://hortonworks.com/services/support/enterprise/">Flex Subscriptions</a> to cover the Cloudbreak node and all clusters created. To do that you must:</p>
+<p>You can optionally use your existing Hortonworks <a href="https://hortonworks.com/services/support/enterprise/">Flex subscription(s)</a> to cover the Cloudbreak node and all clusters created. </p>
+<p><strong>Prerequisites</strong>: You must have an existing SmartSense ID and a Flex subscription. For general information about the Hortonworks Flex Support Subscription, visit the Hortonworks Support page at <a href="https://hortonworks.com/services/support/enterprise/">https://hortonworks.com/services/support/enterprise/</a>.</p>
+<p>The general steps are:</p>
 <ol>
-<li>Configure SmartSenseID and Telemetry in your <code>Profile</code> file.   </li>
-<li>Register your Flex Subscription in the Cloudreak web UI.</li>
+<li>Configure Smart Sense in your <code>Profile</code> file.   </li>
+<li>Register your Flex subscription in the Cloudbreak web UI in the the <strong>manage flex subscriptions</strong> pane. You can register and manage multiple Flex subscriptions.  </li>
 </ol>
-<p>Once you've performed these steps, your flex subscription can be used for the Cloudbreak node and all newly created clusters. You can register multiple subscriptions and manage them in the cloud controller UI.</p>
-<p>For general information about the Hortonworks Flex Support Subscription, visit the Hortonworks Support page at <a href="https://hortonworks.com/services/support/enterprise/">https://hortonworks.com/services/support/enterprise/</a>.</p>
-<h3 id="configuring-flex">Configuring Flex</h3>
-<ol>
-<li>
-<p>To configure flex in Cloudbreak, enable SmartSense in the Profile by adding the following variables:</p>
-<p><pre>export CB_SMARTSENSE_ID=YOUR-SMARTSENSE-ID<br />
-export CB_SMARTSENSE_CONFIGURE=true</pre></p>
+<p>Once you've performed these steps: </p>
+<ul>
+<li>In the the <strong>manage flex subscriptions</strong> pane, you can assign your registered Flex subscription to the Cloudbreak node and set it as default for newly created clusters.  </li>
+<li>When creating a cluster using the advanced options, you can select the Flex subscription that you want to use.<br />
+This option is available in the <strong>CONFIGURE CLUSTER</strong> &gt; <strong>Flex Subscriptions</strong> section of the create cluster form.  </li>
+</ul>
+<p>Alternatively, you can perform these steps using the Cloudbreak Shell. </p>
+<h3 id="configuring-smartsense">Configuring SmartSense</h3>
+<p>To configure SmartSense in Cloudbreak, enable SmartSense and add your SmartSense ID to the <code>Profile</code> by adding the following variables:</p>
+<pre>export CB_SMARTSENSE_CONFIGURE=true
+export CB_SMARTSENSE_ID=YOUR-SMARTSENSE-ID</pre>
+
 <p>For example:</p>
-<p><pre>export CB_SMARTSENSE_ID=A-00000000-C-00000000<br />
-export CB_SMARTSENSE_CONFIGURE=true</pre></p>
-</li>
-</ol>
+<pre>export CB_SMARTSENSE_CONFIGURE=true
+export CB_SMARTSENSE_ID=A-00000000-C-00000000</pre>
+
 <p>You can do this in one of the two ways:</p>
 <ul>
-<li>When initiating Cloudbreak  </li>
-<li>After you've already initiated Cloudbreak Deployer. In this case, you must restart Cloudbreak using <code>cbd restart</code>.</li>
+<li>When initiating Cloudbreak Deployer  </li>
+<li>After you've already initiated Cloudbreak Deployer. If you choose this option, you must restart Cloudbreak using <code>cbd restart</code>.</li>
 </ul>
+<blockquote>
+<p>SmartSense ID defined in the <code>Profile</code> file always overrides the ID registered via Cloudbreak Shell.</p>
+</blockquote>
 <h3 id="managing-flex-subscriptions">Managing Flex Subscriptions</h3>
-<p>Once you log in to the Cloudbreak web UI, you can manage your flex subscriptions from the manage flex subscriptions tab. From this tab, you can:</p>
+<p>Once you log in to the Cloudbreak web UI, you can manage your Flex subscriptions from the <strong>manage flex subscriptions</strong> pane. You can:</p>
 <ul>
-<li>Register a new flex subscription.  </li>
-<li>Set a default flex subscription.  </li>
-<li>Select a flex subscription to be used for cloud controller.  </li>
-<li>Delete a flex subscription.  </li>
+<li>Register a new Flex subscription.  </li>
+<li>Set a default Flex subscription.  </li>
+<li>Select a Flex subscription to be used for cloud controller.  </li>
+<li>Delete a Flex subscription.  </li>
 <li>Check which clusters are connected to a specific subscription.  </li>
 </ul>
-<p>When creating a cluster using the advanced options, in the <strong>CONFIGURE CLUSTER</strong> &gt; <strong>Flex Subscriptions</strong>, you can select the flex subscription that you want to use.</p>
-<p>Equivalent options are also available via Cloudbreak Shell. </p>
+<p>When creating a cluster using the advanced options, in the <strong>CONFIGURE CLUSTER</strong> &gt; <strong>Flex Subscriptions</strong>, you can select the Flex subscription that you want to use.</p>
+<h3 id="managing-smartsense-and-flex-subscriptions-via-cloudbreak-shell">Managing SmartSense and Flex Subscriptions via Cloudbreak Shell</h3>
+<h4 id="configuring-smartsense-via-cloudbreak-shell">Configuring SmartSense via Cloudbreak Shell</h4>
+<ol>
+<li>
+<p>Enable SmartSense in the <code>Profile</code> by adding the following variable: </p>
+<p><pre>export CB_SMARTSENSE_CONFIGURE=true</pre></p>
+</li>
+<li>
+<p>You can use Cloudbreak Shell to configure SmartSense subscription on the fly. For example, to register a SmartSense ID <code>A-00000000-C-00000000</code> use:</p>
+<p><code>smartsense register --subscriptionId A-00000000-C-00000000</code></p>
+<blockquote>
+<p>SmartSense ID defined in the <code>Profile</code> file always overrides the ID registered via Cloudbreak Shell.</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="managing-smartsense-via-cloudbreak-shell">Managing SmartSense via Cloudbreak Shell</h4>
+<p>Register SmartSense subscription:</p>
+<pre><code>smartsense register --subscriptionId A-00000000-C-00000000
+</code></pre>
+
+<p>Describe already registered SmartSense subscription:</p>
+<pre><code>smartsense describe
+</code></pre>
+
+<p>Delete SmartSense subscription:</p>
+<pre><code>smartsense delete --subscriptionId A-00000000-C-00000000
+</code></pre>
+
+<h4 id="managing-flex-subscriptions-via-cloudbreak-shell">Managing Flex Subscriptions via Cloudbreak Shell</h4>
+<p>Register Flex subscription:</p>
+<pre><code>flex register --name my-flex-subscription --subscriptionId FLEX-0123456789
+</code></pre>
+
+<p>List already registered Flex subscriptions:</p>
+<pre><code>flex list
+</code></pre>
+
+<p>Describe an existing Flex subscription:</p>
+<pre><code>flex show --name my-flex-subscription
+</code></pre>
+
+<p>Set Flex subscription as default:</p>
+<pre><code>flex set-default --name my-flex-subscription
+</code></pre>
+
+<p>Use Flex subscription for Cloudbreak instance:</p>
+<pre><code>flex use-for-controller --name my-flex-subscription
+</code></pre>
+
+<p>Delete Flex subscription:</p>
+<pre><code>flex delete --name my-flex-subscription
+</code></pre>
                     <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/help.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
