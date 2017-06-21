@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/flow/">
+        <link rel="canonical" href="http://sequenceiq.com/cloudbreak-docs/cloudbreak_database/">
         <link rel="shortcut icon" href="../img/favicon.ico">
 
-	<title>Flows - Cloudbreak 1.16.1</title>
+	<title>Cloudbreak Database - Cloudbreak 1.16.1</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -230,8 +230,8 @@
     <ul class="dropdown-menu">
         
             
-<li >
-    <a href="../cloudbreak_database/">Cloudbreak Database</a>
+<li class="active">
+    <a href="./">Cloudbreak Database</a>
 </li>
 
         
@@ -251,8 +251,8 @@
     <ul class="dropdown-menu">
         
             
-<li class="active">
-    <a href="./">Flows</a>
+<li >
+    <a href="../flow/">Flows</a>
 </li>
 
         
@@ -287,12 +287,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../ambari_database/">
+                        <a rel="next" href="../configuration/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../help/">
+                        <a rel="prev" href="../ambari_database/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -317,57 +317,63 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
+        <li class="main active"><a href="#cloudbreak-database">Cloudbreak Database</a></li>
+        
+            <li><a href="#dump-and-restore-database">Dump and Restore Database</a></li>
+        
+    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
                     
 
-<script src="../js/jquery.min.js"></script>
+<h1 id="cloudbreak-database">Cloudbreak Database</h1>
+<p>By default, Cloudbreak uses a built-in PostgreSQL database to persist data. </p>
+<blockquote>
+<p>For production environments, we suggest that you use an external database, an RDS served by your cloud provider.</p>
+</blockquote>
+<p>If you choose to use the default database, you should know that Cloudbreak deployer includes features for dumping and restoring built-in databases.</p>
+<h2 id="dump-and-restore-database">Dump and Restore Database</h2>
+<p>Cloudbreak deployer uses Docker for the underlying infrastructure and uses Docker volume for storing data. There are two separate volumes: </p>
+<ul>
+<li>a volume called <code>common</code> for storing live data  </li>
+<li>a volume called <code>cbreak_dump</code> for database dumps </li>
+</ul>
+<p>You can override default live data volume any time by extending your <code>Profile</code> with the following variable:</p>
+<pre><code>export COMMON_DB_VOL=&quot;my-live-data-volume&quot;
+</code></pre>
 
-<style id="css">
-    svg {
-        border: 1px solid #999;
-        overflow: hidden;
-    }
-    .node {
-        white-space: nowrap;
-    }
-    .node rect,
-    .node circle,
-    .node ellipse {
-        stroke: #333;
-        fill: #fff;
-        stroke-width: 1.5px;
-    }
-    .cluster rect {
-        stroke: #333;
-        fill: #000;
-        fill-opacity: 0.1;
-        stroke-width: 1.5px;
-    }
-    .edgePath path.path {
-        stroke: #333;
-        stroke-width: 1.5px;
-        fill: none;
-    }
-</style>
+<p>To create database dumps by executing the following commands:</p>
+<pre><code>cbd db dump common cbdb
+cbd db dump common uaadb
+cbd db dump common periscopedb
+</code></pre>
 
-<div class="col-md-9" role="main">
-    <h1>Flows</h1>
-    <p>
-        Cloudbreak has an asynchron mechanism to manage clusters in the background. Each operation like <a href="#StackCreationFlowConfig">stack creation</a> is encapsulated into a flow, and triggered if neccessary.
-    </p>
-    <div id="flow-container"></div>
-</div>
+<p>To list existing dumps, execute the <code>cbd db list-dumps</code> command.</p>
+<p>Each kind of database dump (cbdb, uaadb, periscopedb) has a link to the latest dump on the <code>cbreak_dump</code> volume. During the restore process, Cloudbreak deployer restores from latest dump. </p>
+<p>To check which dump is the latest, execute:</p>
+<pre><code>docker run --rm -v cbreak_dump:/dump -it alpine ls -lsa /dump/cbdb/latest
+</code></pre>
 
-<script src="../js/d3.v3.min.js"></script>
+<blockquote>
+<p>If you want to restore an older dump, you have to link it as the latest.</p>
+</blockquote>
+<p>To remove the existing <code>common</code> volume, stop all the related Cloudbreak containers with <code>cbd kill</code> command, and then remove the volume:</p>
+<pre><code>docker volume rm common
+</code></pre>
 
-<script src="../js/dagre-d3.js"></script>
+<p>To restore databases from dumps, execute:</p>
+<pre><code>cbd db restore-volume-from-dump common cbdb
+cbd db restore-volume-from-dump common uaadb
+cbd db restore-volume-from-dump common periscopedb
+</code></pre>
 
-<script src="../js/graphlib-dot.js"></script>
-
-<script src="../js/flow.js"></script>
-                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/flow.html" ><i class="fa fa-github"></i> Edit on GitHub </a>
+<p>You can easily save your dumps to the host machine by using the following commands:</p>
+<pre><code>docker run --rm -v cbreak_dump:/dump -it alpine cat /dump/cbdb/latest/dump.sql &gt; cbdb.sql
+docker run --rm -v cbreak_dump:/dump -it alpine cat /dump/uaadb/latest/dump.sql &gt; uaadb.sql
+docker run --rm -v cbreak_dump:/dump -it alpine cat /dump/periscopedb/latest/dump.sql &gt; periscopedb.sql
+</code></pre>
+                    <a href="https://github.com/sequenceiq/cloudbreak-docs/blob/master/docs/cloudbreak_database.md" ><i class="fa fa-github"></i> Edit on GitHub </a>
                 </div>
             
         </div>
