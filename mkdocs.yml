@@ -28,7 +28,6 @@ pages:
         - Recipes: recipes.md
         - Blueprints : blueprints.md
         - Cloud Images (TP): images.md
-        - Ambari Database (TP): database.md
         - Platforms (TP): topologies.md
         - Kerberos (TP): kerberos.md
         - LDAP/AD (TP): ldap.md
@@ -36,6 +35,9 @@ pages:
         - SPI: spi.md
         - Basic Operations : operations.md
         - Advanced Configuration : configuration.md
+        - Database configuration:
+            - Cloudbreak Database: cloudbreak_database.md
+            - Ambari Database (TP): ambari_database.md
         - Development :
             - Flows : flow.html
         - Get Help: help.md
