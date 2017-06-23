@@ -382,7 +382,7 @@
 <h1 id="azure-setup">Azure Setup</h1>
 <p>Setting up Cloudbreak on Azure is different than on other cloud providers for which we provide pre-built public images with Cloudbreak Deployer pre-installed. On Azure, you launch Cloudbreak Deployer using the <a href="https://github.com/Azure/azure-quickstart-templates">Azure Resource Manager Templates</a>.</p>
 <h2 id="deploy-using-the-azure-portal">Deploy Using the Azure Portal</h2>
-<p>To get started with Cloudbreak installation using the Azure Resource Manager template, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.16.1%2Fazuredeploy.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
+<p>To get started with Cloudbreak installation using the Azure Resource Manager template, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.16.1%2FmainTemplate.json">  <img alt="deploy on azure" src="http://azuredeploy.net/deploybutton.png" /> </a></p>
 <h3 id="vm-requirements">VM Requirements</h3>
 <p>When selecting an instance type, consider these minimum and recomended requirements:<br />
 - 8GB RAM, 10GB disk, 2 cores 
@@ -395,18 +395,41 @@
 <li>Create a new <code>Resource group</code></li>
 <li>Select an appropriate <code>Resource group location</code></li>
 </ul>
-<p>On the <code>Parameters</code> panel:</p>
-<ul>
-<li>Select the same <code>LOCATION</code> as for the resource group</li>
-<li><code>PASSWORD</code> must be between 6-72 characters long and must satisfy
-  at least 3 of the following password complexity requirements:<ul>
-<li>Contains an uppercase character</li>
-<li>Contains a lowercase character</li>
-<li>Contains a numeric digit</li>
-<li>Contains a special character</li>
-</ul>
-</li>
-</ul>
+<p>On the <code>Settings</code> panel:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Admin Username</td>
+<td>Create an admin login that you will use to log in to the Cloudbreak UI. Must be a valid email address.</td>
+</tr>
+<tr>
+<td>Admin User Password</td>
+<td>Password for the admin login. Must be at least 8 characters containing letters, numbers, and symbols.</td>
+</tr>
+<tr>
+<td>Username</td>
+<td>Enter an admin username for the virtual machine. You will use it to SSH to the VM.</td>
+</tr>
+<tr>
+<td>Smartsense</td>
+<td>Select  whether you want to use SmartSense telemetry.</td>
+</tr>
+<tr>
+<td>Remote Location</td>
+<td>Allow connections from this address range. Must be a valid CIDR IP.</td>
+</tr>
+<tr>
+<td>Ssh key</td>
+<td><p>Paste your SSH public key.</p><p>You can use <code>pbcopy</code> to quickly copy it. For example: <code>pbcopy &lt; /Users/homedir/.ssh/id_rsa.pub</code></p></td>
+</tr>
+</tbody>
+</table>
 <p><strong>Finally</strong> you should review the <code>Legal terms</code> from the <code>Custom deployment</code> panel:</p>
 <ul>
 <li>To agree with the terms and conditions, click on <code>Create</code> button in this panel</li>
