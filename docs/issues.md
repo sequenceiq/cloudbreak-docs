@@ -6,7 +6,7 @@ If you upgrade Cloudbreak to 1.16.1 and you don't have the `UAA_DEFAULT_SECRET` 
 
 **Workaround**: If you have an existing cluster without the `UAA_DEFAULT_SECRET` in your Profile, you must extend the Profile before starting Cloudbreak 1.16.1.
 
-```export UAA_DEFAULT_SECRET=your-old-secret```
+```export UAA_DEFAULT_SECRET=cbsecret2015```
 
 This issue will be fixed in an upcoming release. 
 
