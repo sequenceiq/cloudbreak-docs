@@ -20,12 +20,18 @@ You can override default live data volume any time by extending your `Profile` w
 export COMMON_DB_VOL="my-live-data-volume"
 ```
 
-To create database dumps by executing the following commands:
+To create database dumps, execute the following commands:
 
 ```
 cbd db dump common cbdb
 cbd db dump common uaadb
 cbd db dump common periscopedb
+```
+
+The dump command has an optional third parameter, the `name` of the dump. If you give your dump a name, Cloudbreak deployer will create a symbolic link which points to the SQL dump. For example: 
+
+```
+cbd db dump common cbdb name-of-the-dump
 ```
 
 To list existing dumps, execute the `cbd db list-dumps` command.
@@ -38,7 +44,15 @@ To check which dump is the latest, execute:
 docker run --rm -v cbreak_dump:/dump -it alpine ls -lsa /dump/cbdb/latest
 ```
 
-> If you want to restore an older dump, you have to link it as the latest.
+You can set any of the existing dumps as latest with `set-dump` command. You can set both regular or named dumps. For example: 
+
+```
+cbd db set-dump cbdb 20170628_1805
+```
+or
+```
+cbd db set-dump cbdb name-of-the-dump
+```
 
 To remove the existing `common` volume, stop all the related Cloudbreak containers with `cbd kill` command, and then remove the volume:
 
