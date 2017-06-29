@@ -2,7 +2,7 @@ Setting up Cloudbreak on Azure is different than on other cloud providers for wh
 
 ## Deploy Using the Azure Portal
 
-To get started with Cloudbreak installation using the Azure Resource Manager template, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.16.1%2Fazuredeploy.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
+To get started with Cloudbreak installation using the Azure Resource Manager template, click here: <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsequenceiq%2Fazure-cbd-quickstart%2F1.16.1%2FmainTemplate.json">  ![deploy on azure](http://azuredeploy.net/deploybutton.png) </a>
 
 ### VM Requirements
 
@@ -21,15 +21,16 @@ On the `Custom deployment` panel:
   * Create a new `Resource group`
   * Select an appropriate `Resource group location`
 
-On the `Parameters` panel:
+On the `Settings` panel:
 
-  * Select the same `LOCATION` as for the resource group
-  * `PASSWORD` must be between 6-72 characters long and must satisfy
-  at least 3 of the following password complexity requirements:
-    * Contains an uppercase character
-    * Contains a lowercase character
-    * Contains a numeric digit
-    * Contains a special character
+| Parameter | Description |
+|---|---|
+| Admin Username | Create an admin login that you will use to log in to the Cloudbreak UI. Must be a valid email address. |
+| Admin User Password | Password for the admin login. Must be at least 8 characters containing letters, numbers, and symbols. |
+| Username | Enter an admin username for the virtual machine. You will use it to SSH to the VM. |
+| Smartsense | Select  whether you want to use SmartSense telemetry. |
+| Remote Location | Allow connections from this address range. Must be a valid CIDR IP. |
+| Ssh key| <p>Paste your SSH public key.</p><p>You can use `pbcopy` to quickly copy it. For example: `pbcopy < /Users/homedir/.ssh/id_rsa.pub`</p> |
 
 **Finally** you should review the `Legal terms` from the `Custom deployment` panel:
 
