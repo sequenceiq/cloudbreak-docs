@@ -73,5 +73,4 @@ then execute the commands:
 docker cp mapping.sql cbreak_uaadb_1:/tmp/mapping.sql
 docker exec cbreak_uaadb_1 psql -U postgres -f /tmp/mapping.sql
 ```
-After the mapping is successfully done, you can log in with users authenticated against LDAP.
-If a user is a member of multiple LDAP groups, then an error message is presented during Cloudbreak login.  
+After the mapping is successfully done, you can log in with users authenticated against LDAP. 
