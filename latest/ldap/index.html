@@ -371,11 +371,11 @@ cbd start
 <h2 id="mapping-oauth2-scopes-to-ldap-groups">Mapping Oauth2 scopes to LDAP groups</h2>
 <p>In order for the users to have access to Cloudbreak resources and to be able to create clusters the Oauth2 scopes must be mapped to LDAP groups. At the moment Cloudbreak only supports <code>one LDAP group per user</code> scenario.
 To see the Oauth2 scopes, execute the following command:</p>
-<pre><code>docker exec -it cbreak_uaadb_1 psql -U postgres -c 'select displayname from groups;'
+<pre><code>docker exec -it cbreak_commondb_1 psql -U postgres -d uaadb -c 'select displayname from groups;'
 </code></pre>
 
 <p>To save them to a <code>groups.txt</code> file:</p>
-<pre><code>docker exec cbreak_uaadb_1 psql -U postgres -c 'select displayname from groups;' | tail -n +3 | grep -v rows | xargs -I@ echo @ &gt;&gt; groups.txt
+<pre><code>docker exec cbreak_commondb_1 psql -U postgres -d uaadb -c 'select displayname from groups;' | tail -n +3 | grep -v rows | xargs -I@ echo @ &gt;&gt; groups.txt
 </code></pre>
 
 <p>To generate the SQL commands for the mapping we'll use <a href="https://github.com/gliderlabs/sigil">sigil</a>, which is a string interpolator and template processor. It is a single binary written in Golang and you can download it from the <a href="https://github.com/gliderlabs/sigil/releases">releases</a> page.
@@ -393,8 +393,8 @@ Save the following in a file called: <code>template.sig</code> (cn=admin,ou=scop
 </code></pre>
 
 <p>then execute the commands:</p>
-<pre><code>docker cp mapping.sql cbreak_uaadb_1:/tmp/mapping.sql
-docker exec cbreak_uaadb_1 psql -U postgres -f /tmp/mapping.sql
+<pre><code>docker cp mapping.sql cbreak_commondb_1:/tmp/mapping.sql
+docker exec cbreak_commondb_1 psql -U postgres -d uaadb -f /tmp/mapping.sql
 </code></pre>
 
 <p>After the mapping is successfully done, you can log in with users authenticated against LDAP. </p>
