@@ -42,7 +42,7 @@ Ambari blueprints are a declarative definition of a cluster. With a blueprint, y
  layout, and configurations to materialise a Hadoop cluster instance (via a REST API) without having to use the Ambari
   Cluster Install Wizard.
 
-![](https://raw.githubusercontent.com/sequenceiq/cloudbreak/master/docs/images/ambari-create-cluster.png)
+![](https://raw.githubusercontent.com/hortonworks/cloudbreak/master/docs/images/ambari-create-cluster.png)
 
 ####Salt
 Salt manages complex systems at scale. Salt can be used for data-driven orchestration, remote execution for any infrastructure, configuration management for any app stack, and much more.
