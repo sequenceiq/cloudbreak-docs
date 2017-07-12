@@ -4,7 +4,7 @@ Docs repository for the **Cloudbreak** project. The generated site is available 
 
 Follow these steps
 
-- [ ] Change sitename in [mkdocs.yml](https://github.com/hortonworks/cloudbreak-docs/blob/master/mkdocs.yml#L1)
+- [ ] Change sitename in [mkdocs.yml] (https://github.com/hortonworks/cloudbreak-docs/blob/master/mkdocs.yml#L1)
 - [ ] Refresh image references: `make update-images`
 - [ ] Refresh on-prem version in curl instructions: [onprem.md](https://github.com/hortonworks/cloudbreak-docs/blob/master/docs/onprem.md#install-cloudbreak-deployer-1)
 - [ ] Refresh Azure template reference: [setup.md](https://github.com/hortonworks/cloudbreak-docs/blob/master/docs/azure/setup.md#deploy-using-the-azure-portal)
