@@ -114,6 +114,9 @@ By default the `cbd` tool tries to guess `PUBLIC_IP` to bind Cloudbreak UI to it
 
 #### Generate Your Profile
 
+If not available already, install the jq JSON parser (make sure you are downloading the latest right version):
+`wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64; mv jq-linux64 /bin/jq; chmod +x /bin/jq`
+
 Generate configurations by executing:
 
 ```
